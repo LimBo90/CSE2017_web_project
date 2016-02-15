@@ -9,12 +9,10 @@ class DocumentsController < ApplicationController
 
   def create
   	@document =Document.new(document_params)
-
     if @document.save 
     	flash[:notice] = "The Document #{@document.name} uploaded successfully."
     	redirect_to(:action => 'index')
       #convert_to_images
-      
     else
     	render "new"
     end	
@@ -23,6 +21,7 @@ class DocumentsController < ApplicationController
   def delete
     @document = Document.find(params[:id])
   end
+
   def destroy
   	@document = Document.find(params[:id])
   	@document.destroy
