@@ -3,7 +3,6 @@ class CreateDocuments < ActiveRecord::Migration
     create_table :documents do |t|
      # t.references :user
       t.string "name"
-      t.integer "likes"
       t.string "attachment"
       t.timestamps null: false
     end
