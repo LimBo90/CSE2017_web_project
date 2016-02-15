@@ -11,21 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160215183726) do
-
-  create_table "documents", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.integer  "likes",      limit: 4
-    t.string   "attachment", limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.integer  "document_id", limit: 4
-    t.integer  "position",    limit: 4
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
