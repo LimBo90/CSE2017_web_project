@@ -1,0 +1,12 @@
+<%= error_messages_for(@document) %>
+
+<div class="well">
+  <%= form_for(:document, :url => {:action => "create"} ,:html => {:multipart => true }) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+     <br>
+    <%= f.label :attachment %> 
+    <%= f.file_field :attachment %>
+    <%= f.submit "Save", class: "uploading" %>
+  <% end %>
+</div>

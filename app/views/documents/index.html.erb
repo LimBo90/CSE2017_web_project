@@ -1,0 +1,23 @@
+<% @page_title = "Documents" %>
+<br />
+<%= link_to("Upload Document", {:action => 'new'}, :class => 'back-link') %>
+<br />
+<br />
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Download Link</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @documents.each do |doc| %>
+      <tr>
+        <td><%= doc.name %></td>
+        <td><%= link_to "Download Document", doc.attachment_url %></td>
+       <td><%= link_to("Delete",{:action => 'delete' ,[:id] => doc.id },:class => 'delete') %> </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
