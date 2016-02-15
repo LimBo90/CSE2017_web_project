@@ -6,7 +6,10 @@ class Document < ActiveRecord::Base
 
 	mount_uploader :attachment , PdfUploader
 
-	vali
+  validates :name, presence: true,
+                   length: { within: 8..25 }
+  validates :attachment, presence: true
+  validates :description, length: {maximum: 125}
 
 end
 

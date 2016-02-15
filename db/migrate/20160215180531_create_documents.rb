@@ -4,7 +4,7 @@ class CreateDocuments < ActiveRecord::Migration
       #t.references :user
       t.string "name", null: false, limit: 25
       t.string "attachment", null:false
-      t.string "Description", limit: 125
+      t.string "description", limit: 125
       t.timestamps null: false
     end
   end

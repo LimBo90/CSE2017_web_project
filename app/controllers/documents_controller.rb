@@ -31,9 +31,11 @@ class DocumentsController < ApplicationController
   end
 
   private
+
   def document_params
-  	params.require(:document).permit(:name, :attachment)
+  	params.require(:document).permit(:name, :attachment, :description)
   end
+
   #def convert_to_images
     #pdf_array = Grim.reap("#{Rails.root}/public/uploads/document #{@document.id}")      # returns Grim::Pdf instance for pdf
     #position = 1               # returns the number of pages in the pdf

@@ -1,0 +1,17 @@
+<%= error_messages_for(@document) %>
+<table>
+
+  <tr>
+    <th><%= f.label :name %></th>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :attachment %></th>
+    <td><%= f.file_field :attachment %></td>
+  </tr>
+  <tr>
+    <th><%= f.label :description %></th>
+    <td><%= f.text_area :description , size: '30x15'%></td>
+  </tr>
+
+</table>
