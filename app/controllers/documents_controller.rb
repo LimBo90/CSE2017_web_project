@@ -2,6 +2,8 @@ class DocumentsController < ApplicationController
   THUMBNAIL_WIDTH = 200
   THUMBNAIL_HEIGHT= 200
 
+  before_action :confirm_logged_in
+
   def index
   	@documents = Document.all
   end
@@ -16,8 +18,9 @@ class DocumentsController < ApplicationController
 
   def create
   	@document =Document.new(document_params)
+    @document.uploader = User.find(session[:user_id].to_i)
     if @document.save
-      convert_to_images
+      #convert_to_images
     	flash[:notice] = "The Document #{@document.name} uploaded successfully."
       redirect_to(:action => 'index')
     else

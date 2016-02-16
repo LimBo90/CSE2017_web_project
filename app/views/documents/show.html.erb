@@ -11,6 +11,11 @@
       <td><%= @document.name %></td>
     </tr>
     <tr>
+    <tr>
+      <th>Uploader</th>
+      <td><%= link_to(@document.uploader.username, user_path(@document.uploader.id)) %></td>
+    </tr>
+    <tr>
       <th>Pages</th>
       <td><%= @document.pages.size %></td>
     </tr>

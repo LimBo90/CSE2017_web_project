@@ -5,11 +5,11 @@ Rails.application.routes.draw do
     member do
       get :delete
     end
-
     resources :pages
   end
 
   root "access#index"
+
   resources :users, :except => [:index] do
     member do
       get 'delete'

@@ -1,6 +1,6 @@
 class Document < ActiveRecord::Base
 	
-	#belongs_to :uploader, :class_name => "User"
+	belongs_to :uploader, :class_name => 'User'
 	has_many :pages
 	#has_many :comments
 

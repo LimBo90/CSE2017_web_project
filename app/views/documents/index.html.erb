@@ -11,6 +11,7 @@
     <tr class="header">
       <th>&nbsp;</th>
       <th>Name</th>
+      <th>Owner</th>
       <th>Pages</th>
       <th>Actions</th>
     </tr>
@@ -19,11 +20,13 @@
           <td><%= image_tag("/documents/document #{document.id}/imgs/thumb.png", alt: "thumbnail") %></td>
           <td><%= link_to(document.name, document_pages_path(document_id: document.id),
                           :class => 'action show') %></td>
-          <td class="center"> <%= document.pages.size %> </td>
+          <td><%= link_to(document.uploader.username, user_path(document.uploader.id),
+                          :class => 'action show') %></td>
+          <td class="center"><%=document.pages.size%></td>
           <td class="actions">
             <%= link_to("Show", document_path(id: document.id), :class => 'action show') %>
-            <%= link_to("Edit", edit_document_path(id: document.id), :class => 'action edit') %> <!--TODO: edit only if uploader.id == user.id -->
-            <%= link_to("Delete", delete_document_path(id: document.id), :class => 'action delete') %>
+            <%= link_to("Edit", edit_document_path(id: document.id), :class => 'action edit') if session[:user_id] == document.uploader_id%>
+            <%= link_to("Delete", delete_document_path(id: document.id), :class => 'action delete') if session[:user_id] == document.uploader_id %>
             <%= link_to "Download", document.attachment_url, class: 'action download' %>
           </td>
         </tr>

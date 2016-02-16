@@ -10,12 +10,13 @@
   <%= form_for(@document) do |f| %>
 
       <%= render(:partial => "form", :locals => {:f => f, is_edit: false}) %>
-
       <div class="form-buttons">
         <%= submit_tag("Save") %>
       </div>
 
   <% end %>
 
+  <%= session[:user_id] %>
+  <%= session[:username] %>
 </div>
 
