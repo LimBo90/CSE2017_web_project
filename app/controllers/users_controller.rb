@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       flash[:notice] = "user created successfully."
       session[:user_id] = @user.id
       session[:username] = @user.username
-      redirect_to(:controller => :access ,:action => 'index')
+      redirect_to(root_path)
     else
       # If save fails, redisplay the form so user can fix problems
       render('new')
