@@ -1,0 +1,18 @@
+<% @page_title = "Delete User Confirmation" %>
+<%= link_to("Home", {:controller => 'access', :action => 'index'}, :class => 'back-link') %>
+
+<div class="users delete">
+  <h2>Delete User</h2>
+
+  <%= form_for(:user, :url => user_path(@user.id), :html => {:method => :delete}) do |f| %>
+
+      <p>Are you sure you want to permanently delete this user?</p>
+
+      <p class="reference-name"><%= @user.username %></p>
+
+      <div class="form-buttons">
+        <%= submit_tag("Delete User") %>
+      </div>
+
+  <% end %>
+</div>

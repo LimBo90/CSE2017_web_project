@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
- 
-
-  
   get 'pages/index'
 
   resources :documents do
@@ -11,9 +8,15 @@ Rails.application.routes.draw do
 
     resources :pages
   end
-  #root "resume#index"
-  
-  #match ':controller(/:action(/:id))', :via => [:get, :post]
+
+  root "access#index"
+  resources :users, :except => [:index] do
+    member do
+      get 'delete'
+    end
+  end
+  match ':controller(/:action(/:id))', :via => [:get, :post]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

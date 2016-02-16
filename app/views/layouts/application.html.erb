@@ -6,16 +6,19 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-	<body>
-    <div id="main">
-      <% if !flash[:notice].blank? %>
-          <div class="notice">
-            <%= flash[:notice] %>
-          </div>
-      <% end %>
-      <div id="content">
-        <%= yield %>
+<body>
+<div id="header">
+  <h1>CSE2017 Project</h1>
+</div>
+<div id="main">
+  <% if !flash[:notice].blank? %>
+      <div class="notice">
+        <%= flash[:notice] %>
       </div>
-    </div>
-	</body>
+  <% end %>
+  <div id="content">
+    <%= yield %>
+  </div>
+</div>
+</body>
 </html>
