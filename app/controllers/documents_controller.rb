@@ -78,6 +78,7 @@ class DocumentsController < ApplicationController
     end
   end
 
+
   #def convert_to_images
     #pdf_array = Grim.reap("#{Rails.root}/public/uploads/document #{@document.id}")      # returns Grim::Pdf instance for pdf
     #position = 1               # returns the number of pages in the pdf
@@ -85,9 +86,9 @@ class DocumentsController < ApplicationController
       #p.save("#{Rails.root}/public/saved_images/#{@document.name}/#{position}.png")
      # Page.new(:document_id => @document.id , :position => position , :avatar => p)
       #Page.save
-     # redirect_to(:controller => 'pages',:action => 'create', 
+     # redirect_to(:controller => 'pages',:action => 'create',
       #  :document_id => @document.id , :position => position , :avatar => page)
-    #position +=1 
+    #position +=1
    #end
   #end
 end
