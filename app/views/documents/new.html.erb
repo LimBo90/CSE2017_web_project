@@ -2,12 +2,12 @@
 
 <% @page_title = "New Document" %>
 
-<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
+<%= link_to("<< Back to List", documents_path, :class => 'back-link') %>
 
 <div class="document new">
   <h2>New Document</h2>
 
-  <%= form_for(:document, :url => {:action => 'create'}) do |f| %>
+  <%= form_for(@document) do |f| %>
 
       <%= render(:partial => "form", :locals => {:f => f, is_edit: false}) %>
 

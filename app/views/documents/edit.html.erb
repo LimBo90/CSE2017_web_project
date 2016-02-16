@@ -2,12 +2,12 @@
 
 <% @page_title = "Edit Document" %>
 
-<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
+<%= link_to("<< Back to List", documents_path, :class => 'back-link') %>
 
 <div class="document edit">
   <h2>Edit Document</h2>
 
-  <%= form_for(:document, :url => {:action => 'update', id: @document.id}) do |f| %>
+  <%= form_for(@document) do |f| %>
 
       <%= render(:partial => "form", :locals => {:f => f, is_edit: true}) %>
 

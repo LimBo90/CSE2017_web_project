@@ -1,11 +1,12 @@
 <% @page_title = "Delete Document" %>
 
-<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
+<%= link_to("<< Back to List", documents_path, :class => 'back-link') %>
 
 <div class="document delete">
   <h2>Delete Document</h2>
 
-  <%= form_for(:document, :url => {:action => 'destroy', :id => @document.id})do|f| %>
+  <%= form_for(:document, :url => document_path(@document.id),
+               :html => {:method => :delete}) do|f| %>
 
     <p>Are you sure you want to permanently delete this document?</p>
 
