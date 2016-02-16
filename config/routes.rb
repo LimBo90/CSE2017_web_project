@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'pages/index'
 
-  resources :documents, only: [:index, :new, :create, :destroy]
+  #resources :documents, only: [:index, :new, :create]
   #root "resume#index"
   
   match ':controller(/:action(/:id))', :via => [:get, :post]

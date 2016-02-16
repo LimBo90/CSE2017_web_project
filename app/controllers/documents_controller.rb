@@ -43,9 +43,11 @@ class DocumentsController < ApplicationController
 
   def destroy
   	@document = Document.find(params[:id])
+
   	@document.destroy
     flash[:notice] = "The Document #{@document.name} deleted successfully."
   	redirect_to(:action => 'index')
+    #TODO: delete file from application
   end
 
   private
