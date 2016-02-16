@@ -21,6 +21,21 @@ class DocumentsController < ApplicationController
     	render "new"
     end	
   end
+
+  def edit
+    @document=Document.find(params[:id])
+  end
+
+  def update
+    @document = Document.find(params[:id])
+    if @document.update_attributes(document_params)
+      flash[:notice] = "The Document #{@document.name} updated successfully."
+      redirect_to(:action => 'index')
+      #convert_to_images
+    else
+      render "edit"
+    end
+  end
   
   def delete
     @document = Document.find(params[:id])
