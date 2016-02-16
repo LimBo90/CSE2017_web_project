@@ -34,7 +34,7 @@
       <td><%= (@user.updated_at).to_s(:long_ordinal) %></td>
     </tr>
   </table>
-  <%= link_to("Edit Details", {:action => 'edit', :id => @user.id}, :class => 'back-link') %>
-  <%= link_to("Delete User", {:action => 'delete', :id => @user.id}, :class => 'back-link') %>
+  <%= link_to("Edit Details", edit_user_path(@user.id)) %>
+  <%= link_to("Delete User", delete_user_path(@user.id)) %>
 
 </div>

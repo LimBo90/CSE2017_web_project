@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       # If update succeeds, redirect to the index action
       flash[:notice] = "user updated successfully."
-      redirect_to(:action => 'show', :id => @user.id)
+      redirect_to(user_path(@user.id))
     else
       # If update fails, redisplay the form so user can fix problems
       render('edit')
@@ -53,8 +53,10 @@ class UsersController < ApplicationController
   def destroy
     user = User.find(params[:id]).destroy
     flash[:notice] = "user '#{user.name}' destroyed successfully."
-
-    redirect_to(:controller => 'access', :action => 'logout')
+    session[:user_id] = nil
+    session[:username] = nil
+    session[:name]= nil
+    redirect_to(:controller => 'access', :action => 'login')
   end
 
 

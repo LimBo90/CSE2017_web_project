@@ -4,7 +4,7 @@
 <div class="users edit">
   <h2>Update User</h2>
 
-  <%= form_for(:user, :url => {:action => 'update', :id => @user.id}) do |f| %>
+  <%= form_for(@user) do |f| %>
 
       <%= render(:partial => "form", :locals => {:f => f}) %>
 

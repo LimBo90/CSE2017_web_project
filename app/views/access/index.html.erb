@@ -2,7 +2,7 @@
 
 <div class="menu">
   <h2>User Menu</h2>
-  <div class="identity">Hello, <%=link_to(session[:name], {:controller => 'users', :action => 'show', :id => session[:user_id]})%></div>
+  <div class="identity">Hello, <%=link_to(session[:name], user_path(session[:user_id]))%></div>
   <ul>
     <li><%= link_to("Logout", :action => 'logout') %></li>
   </ul>
