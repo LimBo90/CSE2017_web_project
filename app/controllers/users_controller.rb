@@ -19,7 +19,6 @@ class UsersController < ApplicationController
       flash[:notice] = "user created successfully."
       session[:user_id] = @user.id
       session[:username] = @user.username
-      session[:name]= @user.name
       redirect_to(:controller => :access ,:action => 'index')
     else
       # If save fails, redisplay the form so user can fix problems
@@ -46,8 +45,8 @@ class UsersController < ApplicationController
   end
 
   def delete
-    #TODO: if the user deleted himself all the slides the user uploaded need to be modified
     @user = User.find(params[:id])
+    #TODO: if the user deleted himself all the slides the user uploaded need to be modified
   end
 
   def destroy
@@ -55,7 +54,6 @@ class UsersController < ApplicationController
     flash[:notice] = "user '#{user.name}' destroyed successfully."
     session[:user_id] = nil
     session[:username] = nil
-    session[:name]= nil
     redirect_to(:controller => 'access', :action => 'login')
   end
 

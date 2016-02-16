@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => EMAIL_REGEX
   validates_confirmation_of :email
   validate :birth_date_is_valid
+  
 
   def birth_date_is_valid
     if age < 4 || age > 120

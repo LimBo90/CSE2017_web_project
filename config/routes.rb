@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :pages
   end
 
-  root "access#index"
+  root "documents#index"
 
   resources :users, :except => [:index] do
     member do
