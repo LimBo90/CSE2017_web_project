@@ -12,7 +12,7 @@
   <%if session[:user_id]%>
       <ul>
         <%= link_to(session[:username], user_path(session[:user_id])) %>,
-        <%= link_to("Logout", :action => 'logout') %></li>
+        <%= link_to("Logout", :controller => 'access',:action => 'logout') %></li>
       </ul>
   <% end %>
   <% if !flash[:notice].blank? %>
