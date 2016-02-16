@@ -1,0 +1,40 @@
+<% @page_title = "User Details" %>
+<%= link_to("Home", {:controller => 'access', :action => 'index'}, :class => 'back-link') %>
+
+<div class="user show">
+  <h2>User Details</h2>
+
+  <table summary="User detail view">
+    <tr>
+      <th>User Name</th>
+      <td><%= @user.username %></td>
+    </tr>
+    <tr>
+      <th>First Name</th>
+      <td><%= @user.first_name %></td>
+    </tr>
+    <tr>
+      <th>Last Name</th>
+      <td><%= @user.last_name %></td>
+    </tr>
+    <tr>
+      <th>Email Address</th>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <th>Birth Date</th>
+      <td><%= (@user.birth_date).to_s(:long_ordinal) %></td>
+    </tr>
+    <tr>
+      <th>Registered</th>
+      <td><%= (@user.created_at).to_s(:long_ordinal) %></td>
+    </tr>
+    <tr>
+      <th>Updated</th>
+      <td><%= (@user.updated_at).to_s(:long_ordinal) %></td>
+    </tr>
+  </table>
+  <%= link_to("Edit Details", edit_user_path(@user.id)) %>
+  <%= link_to("Delete User", delete_user_path(@user.id)) %>
+
+</div>
