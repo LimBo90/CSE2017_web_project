@@ -1,0 +1,36 @@
+<% @page_title = "Documents" %>
+
+<div class="documents index">
+  <h2>Documents</h2>
+
+
+  <%= link_to(image_tag('plus_sign.png', :size => '11x11', :alt => '+') + " Add New Subject", new_document_path, :class => 'action new') %>
+
+  <div><%= pluralize(@documents.size, 'document') %> found</div>
+  <table class="listing" summary="document list">
+    <tr class="header">
+      <th>&nbsp;</th>
+      <th>Name</th>
+      <th>Owner</th>
+      <th>Pages</th>
+      <th>Actions</th>
+    </tr>
+    <% @documents.each do |document| %>
+        <tr class="<%= cycle('odd', 'even') %>">
+          <td><%= image_tag("/documents/document #{document.id}/imgs/thumb.png", alt: "thumbnail") %></td>
+          <td><%= link_to(document.name, document_pages_path(document_id: document.id),
+                          :class => 'action show') %></td>
+          <td><%= link_to(document.uploader.username, user_path(document.uploader.id),
+                          :class => 'action show') %></td>
+          <td class="center"><%=document.pages.size%></td>
+          <td class="actions">
+            <%= link_to("Show", document_path(id: document.id), :class => 'action show') %>
+            <%= link_to("Edit", edit_document_path(id: document.id), :class => 'action edit') if session[:user_id] == document.uploader_id%>
+            <%= link_to("Delete", delete_document_path(id: document.id), :class => 'action delete') if session[:user_id] == document.uploader_id %>
+            <%= link_to "Download", document.attachment_url, class: 'action download' %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+</div>
+

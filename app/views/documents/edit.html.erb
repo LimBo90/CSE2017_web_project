@@ -1,0 +1,21 @@
+
+
+<% @page_title = "Edit Document" %>
+
+<%= link_to("<< Back to List", documents_path, :class => 'back-link') %>
+
+<div class="document edit">
+  <h2>Edit Document</h2>
+
+  <%= form_for(@document) do |f| %>
+
+      <%= render(:partial => "form", :locals => {:f => f, is_edit: true}) %>
+
+      <div class="form-buttons">
+        <%= submit_tag("Update") %>
+      </div>
+
+  <% end %>
+
+</div>
+

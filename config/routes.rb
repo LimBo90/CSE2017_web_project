@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+  get 'pages/index'
 
-  root "access#index"
-  #get "demo/index"
+  resources :documents do
+    member do
+      get :delete
+    end
+    resources :pages
+  end
+
+  root "documents#index"
+
   resources :users, :except => [:index] do
     member do
       get 'delete'
