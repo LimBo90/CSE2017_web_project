@@ -16,11 +16,7 @@ class Document < ActiveRecord::Base
   def directory
     File.dirname(self.attachment.current_path)
   end
-
-  def thumbnail_path
-    "#{self.attachment.url}/imgs/thumb.png"
-  end
-
+  
   private
   def remove_folder
     FileUtils.rm_rf(self.directory)
