@@ -19,7 +19,7 @@
           <td class="center"> 15 </td>
           <td class="actions">
             <%= link_to("Show", {:action => 'show', :id => document.id}, :class => 'action show') %>
-            <%= link_to("Edit", {:action => 'edit', :id => document.id}, :class => 'action edit') %>
+            <%= link_to("Edit", {:action => 'edit', :id => document.id}, :class => 'action edit') %> <!--TODO: edit only if uploader.id == user.id -->
             <%= link_to("Delete", {:action => 'delete', :id => document.id}, :class => 'action delete') %>
             <%= link_to "Download", document.attachment_url, class: 'action download' %>
           </td>

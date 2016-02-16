@@ -1,0 +1,31 @@
+<% @page_title = "Show Document" %>
+
+<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
+
+<div class="documents show">
+  <h2>Show Document</h2>
+
+  <table summary="Document detail view">
+    <tr>
+      <th>Name</th>
+      <td><%= @document.name %></td>
+    </tr>
+    <tr>
+      <th>Pages</th>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td><%= @document.description %></td>
+    </tr>
+    <tr>
+      <th>Created</th>
+      <td><%= @document.created_at %></td>
+    </tr>
+    <tr>
+      <th>Updated</th>
+      <td><%= @document.updated_at %></td>
+    </tr>
+  </table>
+
+</div>

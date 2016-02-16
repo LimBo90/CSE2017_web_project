@@ -3,6 +3,10 @@ class DocumentsController < ApplicationController
   	@documents = Document.all
   end
 
+  def show
+    @document = Document.find(params[:id])
+  end
+
   def new
   	@document = Document.new
   end
@@ -17,7 +21,7 @@ class DocumentsController < ApplicationController
     	render "new"
     end	
   end
-
+  
   def delete
     @document = Document.find(params[:id])
   end
