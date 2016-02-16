@@ -1,7 +1,7 @@
 class Document < ActiveRecord::Base
 	
 	#belongs_to :uploader, :class_name => "User"
-	has_many :images
+	has_many :pages
 	#has_many :comments
 
 	mount_uploader :attachment , PdfUploader
@@ -11,5 +11,19 @@ class Document < ActiveRecord::Base
   validates :attachment, presence: true
   validates :description, length: {maximum: 125}
 
+  after_destroy :remove_folder
+
+  def directory
+    File.dirname(self.attachment.current_path)
+  end
+
+  def thumbnail_path
+    "#{self.attachment.url}/imgs/thumb.png"
+  end
+
+  private
+  def remove_folder
+    FileUtils.rm_rf(self.directory)
+  end
 end
 

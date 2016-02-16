@@ -9,14 +9,17 @@
   <div><%= pluralize(@documents.size, 'document') %> found</div>
   <table class="listing" summary="document list">
     <tr class="header">
+      <th>&nbsp;</th>
       <th>Name</th>
       <th>Pages</th>
       <th>Actions</th>
     </tr>
     <% @documents.each do |document| %>
         <tr class="<%= cycle('odd', 'even') %>">
-          <td><%= document.name %></td>
-          <td class="center"> 15 </td>
+          <td><%= image_tag("/documents/document #{document.id}/imgs/thumb.png", alt: "thumbnail") %></td>
+          <td><%= link_to(document.name, document_pages_path(document_id: document.id),
+                          :class => 'action show') %></td>
+          <td class="center"> <%= document.pages.size %> </td>
           <td class="actions">
             <%= link_to("Show", document_path(id: document.id), :class => 'action show') %>
             <%= link_to("Edit", edit_document_path(id: document.id), :class => 'action edit') %> <!--TODO: edit only if uploader.id == user.id -->
@@ -27,3 +30,4 @@
     <% end %>
   </table>
 </div>
+

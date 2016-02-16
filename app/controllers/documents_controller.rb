@@ -1,4 +1,7 @@
 class DocumentsController < ApplicationController
+  THUMBNAIL_WIDTH = 200
+  THUMBNAIL_HEIGHT= 200
+
   def index
   	@documents = Document.all
   end
@@ -13,10 +16,10 @@ class DocumentsController < ApplicationController
 
   def create
   	@document =Document.new(document_params)
-    if @document.save 
+    if @document.save
+      convert_to_images
     	flash[:notice] = "The Document #{@document.name} uploaded successfully."
-    	redirect_to(:action => 'index')
-      #convert_to_images
+      redirect_to(:action => 'index')
     else
     	render "new"
     end	
@@ -31,7 +34,6 @@ class DocumentsController < ApplicationController
     if @document.update_attributes(document_params)
       flash[:notice] = "The Document #{@document.name} updated successfully."
       redirect_to(:action => 'index')
-      #convert_to_images
     else
       render "edit"
     end
@@ -43,17 +45,34 @@ class DocumentsController < ApplicationController
 
   def destroy
   	@document = Document.find(params[:id])
-
   	@document.destroy
     flash[:notice] = "The Document #{@document.name} deleted successfully."
   	redirect_to(:action => 'index')
-    #TODO: delete file from application
   end
 
   private
 
   def document_params
   	params.require(:document).permit(:name, :attachment, :description)
+  end
+
+
+  def convert_to_images
+    # Convert pdf to ImageList
+    @pdf = Magick::ImageList.new(@document.attachment.current_path)
+    # Create Thumbnail
+    thumb = @pdf[0].scale(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+    # Create imgs directory
+    pages_directory = "#{@document.directory}/imgs"
+    FileUtils.mkdir_p(pages_directory)
+    # Create thumbnail
+    thumb.write "#{pages_directory}/thumb.png"
+    # Write each image in a file
+    @pdf.each_with_index do |img, index|
+      img.write("#{pages_directory}/#{index}.jpg")
+      page = Page.new(position: index)
+      @document.pages << page
+    end
   end
 
   #def convert_to_images

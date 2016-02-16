@@ -7,5 +7,6 @@ class CreateDocuments < ActiveRecord::Migration
       t.string "description", limit: 125
       t.timestamps null: false
     end
+
   end
 end

@@ -21,11 +21,13 @@ ActiveRecord::Schema.define(version: 20160215183726) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "images", force: :cascade do |t|
+  create_table "pages", force: :cascade do |t|
     t.integer  "document_id", limit: 4
-    t.integer  "position",    limit: 4
+    t.integer  "position",    limit: 4, null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
+
+  add_index "pages", ["document_id"], name: "index_pages_on_document_id", using: :btree
 
 end

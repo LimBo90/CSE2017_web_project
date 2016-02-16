@@ -2,14 +2,14 @@ Rails.application.routes.draw do
  
 
   
-  get 'images/index'
-
   get 'pages/index'
 
   resources :documents do
     member do
       get :delete
     end
+
+    resources :pages
   end
   #root "resume#index"
   
