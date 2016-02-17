@@ -13,6 +13,7 @@
 <div id="main">
   <%if session[:user_id]%>
       <ul>
+        <%= link_to("Home", root_path, :class => 'back-link') %>
         <%= link_to(session[:username], user_path(session[:user_id])) %>,
         <%= link_to("Logout", :controller => 'access',:action => 'logout') %></li>
       </ul>

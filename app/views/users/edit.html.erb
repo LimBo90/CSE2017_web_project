@@ -1,12 +1,11 @@
 <% @page_title = "Edit User Details" %>
-<%= link_to("Home", {:controller => 'access', :action => 'index'}, :class => 'back-link') %>
 
 <div class="users edit">
   <h2>Update User</h2>
 
   <%= form_for(@user) do |f| %>
 
-      <%= render(:partial => "form", :locals => {:f => f}) %>
+      <%= render(:partial => "form", :locals => {:f => f, is_edit: true}) %>
 
       <div class="form-buttons">
         <%= submit_tag("Update User") %>
