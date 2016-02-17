@@ -11,6 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160217082233) do
+
+  create_table "comments", force: :cascade do |t|
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "text",             limit: 255, null: false
+    t.string   "user_name",        limit: 255, null: false
+    t.integer  "commentable_id",   limit: 4
+    t.string   "commentable_type", limit: 255
+    t.integer  "user_id",          limit: 4,   null: false
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "documents", force: :cascade do |t|
+    t.integer  "uploader_id", limit: 4
+    t.string   "name",        limit: 25,  null: false
+    t.string   "attachment",  limit: 255, null: false
+    t.string   "description", limit: 125
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "documents", ["uploader_id"], name: "index_documents_on_uploader_id", using: :btree
+
+  create_table "pages", force: :cascade do |t|
+    t.integer  "document_id", limit: 4
+    t.integer  "position",    limit: 4, null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "pages", ["document_id"], name: "index_pages_on_document_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username",        limit: 25
+    t.string   "first_name",      limit: 50
+    t.string   "last_name",       limit: 50
+    t.string   "email",           limit: 50,  null: false
+    t.string   "password_digest", limit: 255, null: false
+    t.date     "birth_date",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end

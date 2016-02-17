@@ -5,10 +5,10 @@ class CreateComments < ActiveRecord::Migration
       t.timestamps null: false
       t.string "text" , null: false
       t.string "user_name" , null: false
-      #t.integer "page_id" , null: false
+      t.belongs_to :commentable , polymorphic: true
       t.integer "user_id" , null: false
     end
     add_index("comments","user_id")
-    #add_index("comments","page_id")
+    add_index :comments , [:commentable_id, :commentable_type]
   end
 end

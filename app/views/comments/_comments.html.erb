@@ -1,0 +1,9 @@
+<table>
+<% @comments.each do |x| %>
+<tr> 
+	 <td> <%= x.user_name %> </td>
+	 <td> <%= x.text %> </td> 
+	 <td> <%= x.created_at %> </td>
+ </tr>
+<% end %>
+</table>

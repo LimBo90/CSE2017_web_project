@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :delete
     end
     resources :pages
+    resources :comments
   end
 
   root "documents#index"
