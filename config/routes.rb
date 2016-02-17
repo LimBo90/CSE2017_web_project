@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :pages do
+    resources :comments
+  end
 
   root "documents#index"
 

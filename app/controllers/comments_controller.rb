@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
 		if @comment.save
       	redirect_to request.referrer
     	else
-      	redirect_to @commentable , notice: "Something went wrong, please try again."
+      	redirect_to request.referrer , notice: "Something went wrong, please try again."
 		end
 	end
 
@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
 		if  authorized_user?
 			if @comment.update_attributes(comment_params)
 				flash[:notice] = "Comment updated successfully."
-				redirect_to @commentable #TODO: redirect to index not Dtails
+				redirect_to @commentable #redirect to page index if document
 			else
 				# If update fails, redisplay the form so user can fix problems
 				render('edit')
