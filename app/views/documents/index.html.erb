@@ -17,14 +17,14 @@
     </tr>
     <% @documents.each do |document| %>
         <tr class="<%= cycle('odd', 'even') %>">
-          <td><%= image_tag("/documents/document #{document.id}/imgs/thumb.png", alt: "thumbnail") %></td>
+          <td><%= image_tag("/documents/document #{document.id}/thumb.png", alt: "thumbnail") %></td>
           <td><%= link_to(document.name, document_pages_path(document_id: document.id),
                           :class => 'action show') %></td>
           <td><%= link_to(document.uploader.username, user_path(document.uploader.id),
                           :class => 'action show') %></td>
           <td class="center"><%=document.pages.size%></td>
           <td class="actions">
-            <%= link_to("Show", document_path(id: document.id), :class => 'action show') %>
+            <%= link_to("Details", document_path(id: document.id), :class => 'action show') %>
             <%= link_to("Edit", edit_document_path(id: document.id), :class => 'action edit') if session[:user_id] == document.uploader_id%>
             <%= link_to("Delete", delete_document_path(id: document.id), :class => 'action delete') if session[:user_id] == document.uploader_id %>
             <%= link_to "Download", document.attachment_url, class: 'action download' %>

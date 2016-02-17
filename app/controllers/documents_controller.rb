@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
-  THUMBNAIL_WIDTH = 200
-  THUMBNAIL_HEIGHT= 200
+  THUMBNAIL_WIDTH = 150
+  THUMBNAIL_HEIGHT= 100
 
   before_action :confirm_logged_in
 
@@ -20,7 +20,7 @@ class DocumentsController < ApplicationController
   	@document =Document.new(document_params)
     @document.uploader = User.find(session[:user_id].to_i)
     if @document.save
-      #convert_to_images
+      convert_to_images
     	flash[:notice] = "The Document #{@document.name} uploaded successfully."
       redirect_to(:action => 'index')
     else
@@ -63,16 +63,15 @@ class DocumentsController < ApplicationController
   def convert_to_images
     # Convert pdf to ImageList
     @pdf = Magick::ImageList.new(@document.attachment.current_path)
-    # Create Thumbnail
+    # Create and save Thumbnail
     thumb = @pdf[0].scale(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+    thumb.write "#{@document.directory}/thumb.png"
     # Create imgs directory
-    pages_directory = "#{@document.directory}/imgs"
-    FileUtils.mkdir_p(pages_directory)
-    # Create thumbnail
-    thumb.write "#{pages_directory}/thumb.png"
+    images_directory = "#{@document.directory}/imgs"
+    FileUtils.mkdir_p(images_directory)
     # Write each image in a file
     @pdf.each_with_index do |img, index|
-      img.write("#{pages_directory}/#{index}.jpg")
+      img.write("#{images_directory}/#{index}.jpg")
       page = Page.new(position: index)
       @document.pages << page
     end
