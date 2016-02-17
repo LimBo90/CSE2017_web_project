@@ -1,12 +1,11 @@
 <% @page_title = "Registeraion Form" %>
-<%= link_to("Home", root_path, :class => 'back-link') %>
 
 <div class="users new">
   <h2>Create User</h2>
 
   <%= form_for(@user) do |f| %>
 
-      <%= render(:partial => "form", :locals => {:f => f}) %>
+      <%= render(:partial => "form", :locals => {:f => f, is_edit: false }) %>
 
       <div class="form-buttons">
         <%= submit_tag("Create User") %>

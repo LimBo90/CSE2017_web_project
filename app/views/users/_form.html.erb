@@ -21,16 +21,23 @@
     <th><%= f.label(:email_confirmation, "Email Confirmation") %></th>
     <td><%= f.text_field(:email_confirmation) %></td>
   </tr>
-  <tr>
-    <th><%= f.label(:password) %></th>
-    <td><%= f.password_field(:password) %></td>
-  </tr>
-  <tr>
-    <th><%= f.label(:password_confirmation) %></th>
-    <td><%= f.password_field(:password_confirmation) %></td>
-  </tr>
+  <% unless is_edit %>
+      <tr>
+        <th><%= f.label(:password) %></th>
+        <td><%= f.password_field(:password) %></td>
+      </tr>
+      <tr>
+        <th><%= f.label(:password_confirmation) %></th>
+        <td><%= f.password_field(:password_confirmation) %></td>
+      </tr>
+  <% end %>
   <tr>
     <th><%= f.label :birthday, "Birth Date" %></th>
     <td><%= f.date_select(:birth_date, :order => [:day, :month, :year], :start_year => Date.today.year - 100, :end_year => Date.today.year)%></td>
   </tr>
+  <% if is_edit %>
+      <tr>
+        <td><%= link_to "Change Passowrd", :action => :change_password, :id => @user.id%></td>
+      </tr>
+  <% end %>
 </table>
