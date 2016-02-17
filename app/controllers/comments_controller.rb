@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
 		@comment.user_name = session[:username]
 		@comment.user_id = session[:user_id].to_i
 		if @comment.save
-      	redirect_to @commentable
+      	redirect_to request.referrer
     	else
       	redirect_to @commentable , notice: "Something went wrong please try again"
 		end

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     member do
       get :delete
     end
-    resources :pages
+    resources :pages do
+      resources :comments
+    end
     resources :comments
   end
 

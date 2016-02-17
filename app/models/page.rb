@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
 
-#has_many :comments as: :commentable
+has_many :comments , as: :commentable
 belongs_to :document
 
 validates :position, :presence => true

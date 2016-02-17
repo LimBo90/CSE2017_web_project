@@ -10,9 +10,6 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
-    @commentable = @document
-    @comments = @commentable.comments
-    @comment = Comment.new
   end
 
   def new
