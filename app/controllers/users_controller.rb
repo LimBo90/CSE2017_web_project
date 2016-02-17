@@ -50,18 +50,18 @@ class UsersController < ApplicationController
   end
 
   def attempt_update_password
-    if params[:user][:current_password].present? && params[:user][:password].present? && params[:user][:password].present?
-      found_user = User.find(params[:id])
-      if found_user
-        authorized_user = found_user.authenticate(params[:user][:current_password])
+  	 @user = User.find(params[:id])
+    if params[:user][:current_password].present? && params[:user][:password].present? && params[:user][:password_confirmation].present?
+      if @user
+        authorized_user = @user.authenticate(params[:user][:current_password])
         end
       if authorized_user
-        if found_user.update_attributes(user_params)
+      	puts "inside attempt_update_password" + user_params.inspect
+        if @user.update_attributes(user_params)
           flash[:notice] = "Password has been changed."
           redirect_to(root_path)
         else
-          flash[:notice] = "New password and New password confirmation does not match."
-          redirect_to(:action => 'change_password', :id => params[:id])
+          render('change_password')
         end
       else
         flash[:notice] = "Incorrect current password."
