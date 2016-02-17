@@ -1,0 +1,11 @@
+<% @page_title = "#{@document.name} | #{@page.position}" %>
+
+<%= link_to("<< Back to document", document_pages_path(document_id: @document.id), :class => 'back-link') %>
+
+<div class="documents show">
+  <h2><%= @document.name %> | Page: <%= @page.position %></h2>
+
+  <%= image_tag @page.link_to_image %>
+  <%= link_to 'Previous', document_page_path(document_id: @document.id, id: @previous_page.id) %>
+  <%= link_to 'Next', document_page_path(document_id: @document.id, id: @next_page.id) %>
+    </div>

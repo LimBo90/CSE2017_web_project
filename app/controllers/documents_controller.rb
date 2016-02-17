@@ -65,9 +65,10 @@ class DocumentsController < ApplicationController
     @pdf = Magick::ImageList.new(@document.attachment.current_path)
     # Create and save Thumbnail
     thumb = @pdf[0].scale(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
-    thumb.write "#{@document.directory}/thumb.png"
+    document_folder_location = File.dirname(@document.attachment.current_path)
+    thumb.write "#{document_folder_location}/thumb.png"
     # Create imgs directory
-    images_directory = "#{@document.directory}/imgs"
+    images_directory = "#{document_folder_location}/imgs"
     FileUtils.mkdir_p(images_directory)
     # Write each image in a file
     @pdf.each_with_index do |img, index|

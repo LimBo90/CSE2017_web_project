@@ -14,7 +14,7 @@ class Document < ActiveRecord::Base
   after_destroy :remove_folder
 
   def directory
-    File.dirname(self.attachment.current_path)
+    "/documents/document #{self.id}"
   end
   
   private

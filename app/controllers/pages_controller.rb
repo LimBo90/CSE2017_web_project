@@ -1,9 +1,14 @@
 class PagesController < ApplicationController
   def index
     @document = Document.find(params[:document_id])
+    @pages = @document.pages.sorted
   end
 
-  def create
+  def show
+    @document = Document.find(params[:document_id])
+    @page = Page.find(params[:id])
+    @next_page = @document.pages.sorted[@page.position + 1]
+    @previous_page = @document.pages.sorted[@page.position - 1]
   end
 
   private

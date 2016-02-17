@@ -17,7 +17,7 @@
     </tr>
     <% @documents.each do |document| %>
         <tr class="<%= cycle('odd', 'even') %>">
-          <td><%= image_tag("/documents/document #{document.id}/thumb.png", alt: "thumbnail") %></td>
+          <td><%= image_tag("#{document.directory}/thumb.png", alt: "thumbnail") %></td>
           <td><%= link_to(document.name, document_pages_path(document_id: document.id),
                           :class => 'action show') %></td>
           <td><%= link_to(document.uploader.username, user_path(document.uploader.id),
