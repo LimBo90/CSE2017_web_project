@@ -1,5 +1,6 @@
 class Page < ActiveRecord::Base
 
+#has_many :comments
 belongs_to :document
 
 validates :position, :presence => true
