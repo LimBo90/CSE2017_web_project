@@ -1,9 +1,10 @@
 <table>
 <% @comments.each do |x| %>
 <tr> 
-	 <td> <%= x.user_name %> </td>
-	 <td> <%= x.text %> </td> 
-	 <td> <%= x.created_at %> </td>
+	<td><%= link_to(x.user_name, user_path(x.user_id))%>: <%= x.text %> </td> 
+</tr>
+<tr>
+	<td><b>created at: </b><%= x.created_at %><hr></td>
  </tr>
-<% end %>
+ <% end %>
 </table>
