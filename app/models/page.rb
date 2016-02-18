@@ -3,8 +3,11 @@ class Page < ActiveRecord::Base
   belongs_to :document
 
   validates :position, :presence => true
+  validates_uniqueness_of :position , scope: :document_id
 
   scope :sorted, lambda { order("pages.position ASC") }
+
+
 
   def link_to_image
     "#{self.document.directory}/imgs/#{self.position}.jpg"
