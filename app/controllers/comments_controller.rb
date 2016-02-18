@@ -25,6 +25,7 @@ class CommentsController < ApplicationController
 
 	def edit
 		@comment = @commentable.comments.find(params[:id])
+		session[:return_to] ||= request.referer
 	end
 
 	def update
@@ -32,7 +33,7 @@ class CommentsController < ApplicationController
 		if  authorized_user?
 			if @comment.update_attributes(comment_params)
 				flash[:notice] = "Comment updated successfully."
-				redirect_to @commentable #redirect to page index if document
+				redirect_to session.delete(:return_to) #redirect to the URL where the edit request came
 			else
 				# If update fails, redisplay the form so user can fix problems
 				render('edit')
