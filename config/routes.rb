@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     end
   end
 
+   resources :pages do
+    resources :comments
+    end
+
   root "documents#index"
 
   resources :users, :except => [:index] do
