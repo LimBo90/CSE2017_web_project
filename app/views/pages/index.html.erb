@@ -1,10 +1,12 @@
+
 <% @page_title = "#{@document.name} | Pages" %>
 
-<%= link_to("<< Back to List", {:controller => 'documents' ,:action => 'index'}, :class => 'back-link') %> <br>
+
+<%= link_to("<< Back to List", documents_path, :class => 'back-link') %> <br>
 
  <%= @document.name %> <br>
 
  <% @pages.each do |page| %>
  <%= link_to(image_tag("/documents/document #{@document.id}/imgs/#{page.position}.jpg",size: "200x200"), { action: "show" , :position => page.position, :document_id => @document.id}) %>
-
+ <%= page.position %>    <!-- TODO: fix grid style -->
 <% end %>

@@ -7,15 +7,11 @@ class PagesController < ApplicationController
     @pages = @document.pages 
   end
 
-  def create
-  end
-
   def show
-  	@page = Page.find_by_position(params[:position])
+    @page = Page.find_by_position(params[:position])
   end
 
   private
-  
    def image_params
     params.require(:image).permit(:document_id,:position)
    end

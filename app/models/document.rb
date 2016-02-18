@@ -11,15 +11,20 @@ class Document < ActiveRecord::Base
   validates :attachment, presence: true
   validates :description, length: {maximum: 125}
 
-  after_destroy :remove_folder
+  after_destroy :remove_folder, :remove_related_pages
 
   def directory
-    File.dirname(self.attachment.current_path)
+    "/documents/document #{self.id}"
   end
   
   private
   def remove_folder
-    FileUtils.rm_rf(self.directory)
+    folder_location = File.dirname(self.attachment.current_path)
+    FileUtils.rm_rf(folder_location)
+  end
+
+  def remove_related_pages
+    self.pages.destroy_all
   end
 end
 

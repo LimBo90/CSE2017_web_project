@@ -67,21 +67,18 @@ class DocumentsController < ApplicationController
   def convert_to_images
     # Convert pdf to ImageList
     @pdf = Magick::ImageList.new(@document.attachment.current_path)
-    # Create Thumbnail
-    thumb = @pdf[0].scale(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
     # Create imgs directory
-    pages_directory = "#{@document.directory}/imgs"
-    FileUtils.mkdir_p(pages_directory)
-    # Create thumbnail
-    thumb.write "#{pages_directory}/thumb.png"
+    document_folder_location = File.dirname(@document.attachment.current_path)
+    images_directory = "#{document_folder_location}/imgs"
+    FileUtils.mkdir_p(images_directory)
+    # Create and save Thumbnail
+    thumb = @pdf[0].scale(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+    thumb.write "#{images_directory}/thumb.png"
     # Write each image in a file
     @pdf.each_with_index do |img, index|
-      img.write("#{pages_directory}/#{index+1}.jpg")
-      page = Page.new(position: index+1)
+      img.write("#{images_directory}/#{index + 1}.jpg")
+      page = Page.new(position: index + 1)
       @document.pages << page
     end
   end
-
-
-  
 end
