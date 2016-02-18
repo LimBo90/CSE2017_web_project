@@ -7,8 +7,8 @@ class PagesController < ApplicationController
   def show
     @document = Document.find(params[:document_id])
     @page = Page.find(params[:id])
-    @next_page = @document.pages.sorted[@page.position + 1]
-    @previous_page = @document.pages.sorted[@page.position - 1]
+    @next_page = @document.pages.find_by_position(@page.position + 1)
+    @previous_page = @document.pages.find_by_position(@page.position - 1)
   end
 
   private

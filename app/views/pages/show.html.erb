@@ -6,6 +6,6 @@
   <h2><%= @document.name %> | Page: <%= @page.position %></h2>
 
   <%= image_tag @page.link_to_image %>
-  <%= link_to 'Previous', document_page_path(document_id: @document.id, id: @previous_page.id) %>
-  <%= link_to 'Next', document_page_path(document_id: @document.id, id: @next_page.id) %>
+  <%= link_to 'Previous', document_page_path(document_id: @document.id, id: @previous_page.id) if @previous_page %>
+  <%= link_to 'Next', document_page_path(document_id: @document.id, id: @next_page.id) if @next_page %>
     </div>

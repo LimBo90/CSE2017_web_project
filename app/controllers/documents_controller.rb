@@ -72,8 +72,8 @@ class DocumentsController < ApplicationController
     FileUtils.mkdir_p(images_directory)
     # Write each image in a file
     @pdf.each_with_index do |img, index|
-      img.write("#{images_directory}/#{index}.jpg")
-      page = Page.new(position: index)
+      img.write("#{images_directory}/#{index + 1}.jpg")
+      page = Page.new(position: index + 1)
       @document.pages << page
     end
   end
