@@ -32,14 +32,14 @@ class CommentsController < ApplicationController
 		if  authorized_user?
 			if @comment.update_attributes(comment_params)
 				flash[:notice] = "Comment updated successfully."
-				redirect_to @commentable #TODO: redirect to show details not index
+				redirect_to @commentable #TODO: redirect to index not Dtails
 			else
 				# If update fails, redisplay the form so user can fix problems
 				render('edit')
 			end
 		else
 			flash[:notice] = "You don't have permissions to edit this comment."
-			redirect_to @commentable
+			redirect_to request.referrer
 		end
 	end
 
@@ -48,10 +48,10 @@ class CommentsController < ApplicationController
 		if  authorized_user?
 			@comment.destroy
 			flash[:notice] = "Comment destroyed successfully."
-			redirect_to @commentable #TODO: redirect to show details not index
+      redirect_to request.referrer
 		else
 			flash[:notice] = "You don't have permissions to delete this comment."
-			redirect_to @commentable
+      redirect_to request.referrer
 		end
 	end
 
