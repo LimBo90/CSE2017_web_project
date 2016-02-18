@@ -1,0 +1,11 @@
+<% @page_title = "Edit comment" %>
+
+<div class="users edit">
+  <h2>Update Comment</h2>
+
+  <%= form_for [@commentable , @comment], method: :patch do |f| %>
+
+      <%= render(:partial => "form", :locals => {:f => f}) %>
+
+  <% end %>
+</div>

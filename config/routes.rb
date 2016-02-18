@@ -6,9 +6,17 @@ Rails.application.routes.draw do
       get :delete
     end
     resources :pages do
-      resources :comments
+      resources :comments, :except => [:show] do
+        member do
+          get :delete
+        end
+      end
     end
-    resources :comments
+    resources :comments, :except => [:show] do
+      member do
+      get :delete
+      end
+    end
   end
 
   root "documents#index"

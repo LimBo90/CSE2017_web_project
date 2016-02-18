@@ -76,6 +76,7 @@ class UsersController < ApplicationController
   def delete
     @user = User.find(params[:id])
     #if the user deleted himself all the slides the user uploaded need to be deleted as well
+    #TODO: when user delete himself all comments are deleted
   end
 
   def destroy

@@ -1,4 +1,6 @@
 <%= form_for [@commentable , @comment] do |f|  %>
-<%= f.text_area(:text) %>
-<%= submit_tag("Send") %>
+    <%= f.text_area(:text, :size => '30x10') %>
+    <div class="form-buttons">
+      <%= submit_tag("Send") %>
+    </div>
 <% end %>
