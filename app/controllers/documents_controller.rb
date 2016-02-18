@@ -21,7 +21,7 @@ class DocumentsController < ApplicationController
     @document.uploader = User.find(session[:user_id].to_i)
     if @document.save
       convert_to_images
-    	flash[:notice] = "The Document #{@document.name} uploaded successfully."
+    	#flash[:notice] = "The Document #{@document.name} uploaded successfully."
       redirect_to(:action => 'index')
     else
     	render "new"
@@ -66,19 +66,26 @@ class DocumentsController < ApplicationController
 
   def convert_to_images
     # Convert pdf to ImageList
-    @pdf = Magick::ImageList.new(@document.attachment.current_path)
+    pdf_reading_time = Benchmark.realtime do
+      @pdf = Magick::ImageList.new(@document.attachment.current_path)
+    end
+
     # Create imgs directory
     document_folder_location = File.dirname(@document.attachment.current_path)
     images_directory = "#{document_folder_location}/imgs"
     FileUtils.mkdir_p(images_directory)
-    # Create and save Thumbnail
-    thumb = @pdf[0].scale(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
-    thumb.write "#{images_directory}/thumb.png"
-    # Write each image in a file
-    @pdf.each_with_index do |img, index|
-      img.write("#{images_directory}/#{index + 1}.jpg")
-      page = Page.new(position: index + 1)
-      @document.pages << page
+
+    images_writing_time = Benchmark.realtime do
+      # Create and save Thumbnail
+      thumb = @pdf[0].scale(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
+      thumb.write "#{images_directory}/thumb.png"
+      # Write each image in a file
+      @pdf.each_with_index do |img, index|
+        img.write("#{images_directory}/#{index + 1}.jpg")
+        page = Page.new(position: index + 1)
+        @document.pages << page
+      end
     end
+    flash[:notice] = "pdf_reading_time = #{pdf_reading_time} seconds | images_writing_time = #{images_writing_time} seconds"
   end
 end
