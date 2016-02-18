@@ -7,8 +7,6 @@ class Page < ActiveRecord::Base
 
   scope :sorted, lambda { order("pages.position ASC") }
 
-
-
   def link_to_image
     "#{self.document.directory}/imgs/#{self.position}.jpg"
   end

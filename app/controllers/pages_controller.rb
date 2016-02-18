@@ -8,14 +8,12 @@ class PagesController < ApplicationController
   end
 
   def show
-    @page = Page.find_by_position(params[:position])
+    @page = Page.find(params[:id])
+    @next_page = @document.pages.find_by_position(@page.position + 1)
+    @previous_page =  @document.pages.find_by_position(@page.position - 1)
   end
 
   private
-   def image_params
-    params.require(:image).permit(:document_id,:position)
-   end
-
    def find_document
       if params[:document_id]
         @document = Document.find(params[:document_id])

@@ -17,9 +17,10 @@
     </tr>
     <% @documents.each do |document| %>
         <tr class="<%= cycle('odd', 'even') %>">
-          <td><%= image_tag("#{document.directory}/imgs/thumb.png", alt: "thumbnail") %></td>
+          <td><%= link_to(image_tag("#{document.directory}/imgs/thumb.png", alt: "thumbnail"), document_pages_path(document_id: document.id),
+                          :class => 'action index') %></td>
           <td><%= link_to(document.name, document_pages_path(document_id: document.id), 
-                          :class => 'action show') %></td>
+                          :class => 'action index') %></td>
           <td><%= link_to(document.uploader.username, user_path(document.uploader.id),
                           :class => 'action show') %></td>
           <td class="center"><%=document.pages.size%></td>
