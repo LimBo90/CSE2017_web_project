@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
-  THUMBNAIL_WIDTH = 200
-  THUMBNAIL_HEIGHT= 200
+  THUMBNAIL_WIDTH = 100
+  THUMBNAIL_HEIGHT= 100
 
   before_action :confirm_logged_in
 
@@ -20,7 +20,7 @@ class DocumentsController < ApplicationController
   	@document =Document.new(document_params)
     @document.uploader = User.find(session[:user_id].to_i)
     if @document.save
-      #convert_to_images
+      convert_to_images
     	flash[:notice] = "The Document #{@document.name} uploaded successfully."
       redirect_to(:action => 'index')
     else
@@ -48,6 +48,10 @@ class DocumentsController < ApplicationController
 
   def destroy
   	@document = Document.find(params[:id])
+    pages = @document.pages
+    pages.each do |p|
+      p.destroy
+    end
   	@document.destroy
     flash[:notice] = "The Document #{@document.name} deleted successfully."
   	redirect_to(:action => 'index')
@@ -72,23 +76,12 @@ class DocumentsController < ApplicationController
     thumb.write "#{pages_directory}/thumb.png"
     # Write each image in a file
     @pdf.each_with_index do |img, index|
-      img.write("#{pages_directory}/#{index}.jpg")
-      page = Page.new(position: index)
+      img.write("#{pages_directory}/#{index+1}.jpg")
+      page = Page.new(position: index+1)
       @document.pages << page
     end
   end
 
 
-  #def convert_to_images
-    #pdf_array = Grim.reap("#{Rails.root}/public/uploads/document #{@document.id}")      # returns Grim::Pdf instance for pdf
-    #position = 1               # returns the number of pages in the pdf
-    #pdf_array.each do |p|
-      #p.save("#{Rails.root}/public/saved_images/#{@document.name}/#{position}.png")
-     # Page.new(:document_id => @document.id , :position => position , :avatar => p)
-      #Page.save
-     # redirect_to(:controller => 'pages',:action => 'create',
-      #  :document_id => @document.id , :position => position , :avatar => page)
-    #position +=1
-   #end
-  #end
+  
 end
