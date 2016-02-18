@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :email
   validate :birth_date_is_valid
 
-  before_destroy :delete_user_documents
+  before_destroy :delete_user_documents, :delete_user_comments
 
   def birth_date_is_valid
     if age < 4 || age > 120
@@ -37,5 +37,9 @@ class User < ActiveRecord::Base
   private
   def delete_user_documents
     self.documents.destroy_all
+  end
+
+  def delete_user_comments
+    self.comments.destroy_all
   end
 end
