@@ -11,6 +11,7 @@ class Document < ActiveRecord::Base
   validates :attachment, presence: true
   validates :description, length: {maximum: 125}
 
+  before_destroy :delete_document_comments
   after_destroy :remove_folder
 
   def directory
@@ -21,5 +22,10 @@ class Document < ActiveRecord::Base
   def remove_folder
     FileUtils.rm_rf(self.directory)
   end
+
+  def delete_document_comments
+    self.comments.destroy_all
+  end
+
 end
 

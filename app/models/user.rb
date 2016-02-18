@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   end
 
   private
+
   def delete_user_documents
     self.documents.destroy_all
   end
@@ -42,4 +43,5 @@ class User < ActiveRecord::Base
   def delete_user_comments
     self.comments.destroy_all
   end
+  
 end
