@@ -1,0 +1,9 @@
+<% @page_title = "#{@document.name} |  Page #{@page.position}" %>
+<%= link_to("<< Back to Slides", {:action => 'index', :document_id => @document.id}, :class => 'back-link') %> <br>
+  <!-- TODO: make the next and previous buttons floating -->
+  <!-- TODO: add page selection -->
+<%= image_tag("/documents/document #{@document.id}/imgs/#{@page.position}.jpg") %>
+
+<%= link_to(image_tag('perivous_page.png',:size => '20x20', :alt => '<') + "Perivous Page", {:document_id => @document.id, :position => @page.position-1},:class => 'action show')  if @page.position > 1 %>
+
+<%= link_to(image_tag('next_page.jpg',:size => '20x20', :alt => '>') + "Next Page", {:document_id => @document.id, :position => @page.position+1},:class => 'action show') if @page.position < @document.pages.size %>
