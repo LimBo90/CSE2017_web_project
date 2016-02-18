@@ -1,3 +1,4 @@
+<h2> Page Show </h2>
 <% @page_title = "#{@document.name} |  Page #{@page.position}" %>
 <%= link_to("<< Back to Slides", {:action => 'index', :document_id => @document.id}, :class => 'back-link') %> <br>
   <!-- TODO: make the next and previous buttons floating -->
@@ -9,3 +10,8 @@
 
 <%= link_to(image_tag('next_page.jpg',:size => '20x20', :alt => '>') + "Next Page", document_page_path(document_id: params[:document_id],
 			id: @next_page.id),:class => 'action show') if @next_page %>
+<div>
+<%= render 'comments/comments' %>
+<%= render 'comments/form' %>
+</div>
+

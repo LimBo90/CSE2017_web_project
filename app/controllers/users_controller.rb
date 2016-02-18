@@ -76,11 +76,12 @@ class UsersController < ApplicationController
   def delete
     @user = User.find(params[:id])
     #if the user deleted himself all the slides the user uploaded need to be deleted as well
+    #when user delete himself all comments are deleted
   end
 
   def destroy
     user = User.find(params[:id]).destroy
-    flash[:notice] = "user '#{user.name}' destroyed successfully."
+    flash[:notice] = "user '#{user.username}' destroyed successfully."
     session[:user_id] = nil
     session[:username] = nil
     redirect_to(:controller => 'access', :action => 'login')

@@ -1,17 +1,19 @@
 class Document < ActiveRecord::Base
 	
-	belongs_to :uploader, :class_name => 'User', :foreign_key => 'uploader_id'
-	has_many :pages
-	#has_many :comments
+  belongs_to :uploader, :class_name => 'User', :foreign_key => 'uploader_id'
+  has_many :pages
+  has_many :comments , as: :commentable
 
-	mount_uploader :attachment , PdfUploader
+  mount_uploader :attachment , PdfUploader
 
   validates :name, presence: true,
                    length: { within: 8..25 }
   validates :attachment, presence: true
   validates :description, length: {maximum: 125}
 
-  after_destroy :remove_folder, :remove_related_pages
+
+   before_destroy :delete_document_comments
+   after_destroy :remove_folder, :remove_related_pages
 
   def directory
     "/documents/document #{self.id}"
@@ -26,5 +28,10 @@ class Document < ActiveRecord::Base
   def remove_related_pages
     self.pages.destroy_all
   end
+
+  def delete_document_comments
+    self.comments.destroy_all
+  end
+
 end
 
