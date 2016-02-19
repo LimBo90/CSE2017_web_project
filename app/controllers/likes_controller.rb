@@ -13,6 +13,7 @@ def new
 	else
 	@like = Like.new(params_like)
 	@like.save
+	redircet_to @likable, notice: "like created."
 end
 
 def delete
