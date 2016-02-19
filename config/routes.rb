@@ -5,7 +5,10 @@ Rails.application.routes.draw do
     member do
       get :delete
     end
-    resources :pages
+    resources :likes
+    resources :pages do
+      resources :likes
+    end
   end
 
   root "documents#index"

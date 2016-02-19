@@ -2,6 +2,8 @@ class Page < ActiveRecord::Base
 
 belongs_to :document
 
+has_many :likes, as :likable
+
 validates :position, :presence => true
 
 scope :sorted, lambda { order("pages.position ASC") }
