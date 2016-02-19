@@ -7,9 +7,23 @@ Rails.application.routes.draw do
     end
     resources :likes
     resources :pages do
-      resources :likes
+    resources :likes  
+      resources :comments, :except => [:show] do
+        member do
+          get :delete
+        end
+      end
+    end
+    resources :comments, :except => [:show] do
+      member do
+      get :delete
+      end
     end
   end
+
+   resources :pages do
+    resources :comments
+    end
 
   root "documents#index"
 
