@@ -21,7 +21,8 @@ class DocumentsController < ApplicationController
     @document.uploader = User.find(session[:user_id].to_i)
     if @document.save
       convert_to_images
-    	#flash[:notice] = "The Document #{@document.name} uploaded successfully."
+      convert_to_images_docsplit
+     #flash[:notice] = "The Document #{@document.name} uploaded successfully."
       redirect_to(:action => 'index')
     else
     	render "new"
@@ -86,6 +87,25 @@ class DocumentsController < ApplicationController
         @document.pages << page
       end
     end
-    flash[:notice] = "pdf_reading_time = #{pdf_reading_time} seconds | images_writing_time = #{images_writing_time} seconds"
+    append_notice("rmagick_pdf_reading_time = #{pdf_reading_time} seconds | rmagick_images_writing_time = #{images_writing_time} seconds")
+  end
+
+  def convert_to_images_docsplit
+    document_folder_location = File.dirname(@document.attachment.current_path)
+    images_directory = "#{document_folder_location}/imgs"
+
+    extracting_time = Benchmark.realtime do
+      Docsplit.extract_images(@document.attachment.current_path, format: [:png], output: images_directory)
+    end
+
+    append_notice "docsplit_extracting_time = #{extracting_time} seconds"
+  end
+
+  def append_notice(notice)
+    if flash[:notice]
+      flash[:notice] = flash[:notice] + ' | ' + notice
+    else
+      flash[:notice] = notice
+    end
   end
 end

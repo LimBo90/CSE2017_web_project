@@ -29,6 +29,8 @@ gem 'carrierwave'
 
 gem 'rmagick'
 
+gem 'docsplit', '~> 0.7.6'
+
 gem "paperclip", "~> 4.3"
 
 
