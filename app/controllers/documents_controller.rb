@@ -1,7 +1,4 @@
 class DocumentsController < ApplicationController
-  THUMBNAIL_WIDTH = 100
-  THUMBNAIL_HEIGHT= 100
-
   before_action :confirm_logged_in
 
   def index
@@ -22,6 +19,7 @@ class DocumentsController < ApplicationController
     if @document.save
       convert_to_images
       convert_to_images_docsplit
+      convert_to_images_rghost
       #flash[:notice] = "The Document #{@document.name} uploaded successfully."
       redirect_to(:action => 'index')
     else
@@ -77,9 +75,6 @@ class DocumentsController < ApplicationController
     FileUtils.mkdir_p(images_directory)
 
     images_writing_time = Benchmark.realtime do
-      # Create and save Thumbnail
-      thumb = @pdf[0].scale(THUMBNAIL_WIDTH, THUMBNAIL_HEIGHT)
-      thumb.write "#{images_directory}/thumb.png"
       # Write each image in a file
       @pdf.each_with_index do |img, index|
         img.write("#{images_directory}/#{index + 1}.jpg")
@@ -99,6 +94,27 @@ class DocumentsController < ApplicationController
       Docsplit.extract_images(@document.attachment.current_path, format: [:jpg], output: images_directory)
     end
     append_notice "docsplit_extracting_time = #{extracting_time} seconds"
+  end
+
+  def convert_to_images_rghost
+    document_folder_location = File.dirname(@document.attachment.current_path)
+    images_directory = "#{document_folder_location}/imgs"
+    FileUtils.mkdir_p(images_directory)
+    extraction_time = Benchmark.realtime do
+      pdf = RGhost::Convert.new(@document.attachment.current_path)
+      images = pdf.to :png, :multipage => true, quality: :ebook
+      if pdf.error
+        raise Exception.new "inside convert_to_images_rghost: Error converting pdf to images"
+      else
+        FileUtils.cp(images[0], "#{images_directory}/thumb.jpg")
+        images.each_with_index do |image ,index|
+          FileUtils.cp(image, "#{images_directory}/#{index + 1}.jpg")
+          page = Page.new(position: index + 1)
+          @document.pages << page
+        end
+      end
+    end
+    append_notice("rghost_extracion_time = #{extraction_time}")
   end
 
   def append_notice(notice)
