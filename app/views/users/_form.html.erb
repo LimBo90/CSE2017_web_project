@@ -37,7 +37,7 @@
   </tr>
   <% if is_edit %>
       <tr>
-        <td><%= link_to "Change Passowrd", :action => :change_password, :id => @user.id%></td>
+        <td><%= link_to "<button>Change Password</button>".html_safe, :action => :change_password, :id => @user.id%></td>
       </tr>
   <% end %>
 </table>

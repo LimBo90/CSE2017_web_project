@@ -2,21 +2,10 @@ Rails.application.routes.draw do
   get 'pages/index'
 
   resources :documents do
-    member do
-      get :delete
-    end
     resources :pages do
-      resources :comments, :except => [:show] do
-        member do
-          get :delete
-        end
-      end
+      resources :comments, :except => [:show]
     end
-    resources :comments, :except => [:show] do
-      member do
-      get :delete
-      end
-    end
+    resources :comments, :except => [:show]
   end
 
    resources :pages do
@@ -25,11 +14,7 @@ Rails.application.routes.draw do
 
   root "documents#index"
 
-  resources :users, :except => [:index] do
-    member do
-      get 'delete'
-    end
-  end
+  resources :users, :except => [:index]
   match ':controller(/:action(/:id))', :via => [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
