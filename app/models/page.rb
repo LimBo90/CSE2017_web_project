@@ -12,7 +12,7 @@ class Page < ActiveRecord::Base
   
   private
     
-  def delete_user_comments
+  def delete_page_comments
     self.comments.destroy_all
   end
 
