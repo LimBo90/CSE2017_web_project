@@ -4,6 +4,7 @@ class PagesController < ApplicationController
 
   before_action :confirm_logged_in
   before_action :find_document
+
   def index
     @commentable = @document
     @comments = @commentable.comments
@@ -30,7 +31,7 @@ class PagesController < ApplicationController
     end
 
   def load_image
-    image = Magick::Image.read(@document.attachment.current_path + "[#{@page.position}]")[0]
+    image = Magick::Image.read(@document.attachment.current_path + "[#{@page.position - 1}]")[0]
     image_path = File.dirname(@document.attachment.current_path) + "/tmp.png"
     image.write(image_path)
   end
@@ -38,7 +39,6 @@ class PagesController < ApplicationController
     def generate_thumbs
       thumb_path = File.dirname(@document.attachment.current_path)+'/thumbs'
       FileUtils.mkdir_p(thumb_path)
-      params[:page] ||= 1
       RGhost::Convert.new(@document.attachment.current_path).to :jpg, :multipage => true, :range => @pages.first.position..@pages.first.position+9,
                                                                       :resolution => 100, :filename => "#{thumb_path+'/thumb.jpg'}"
 
