@@ -29,6 +29,7 @@ gem 'carrierwave'
 
 gem 'rmagick'
 gem 'rghost', '~> 0.9.6'
+gem 'pdf-reader', '~> 1.3', '>= 1.3.3'
 
 gem "paperclip", "~> 4.3"
 

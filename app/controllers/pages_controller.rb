@@ -39,16 +39,7 @@ class PagesController < ApplicationController
       thumb_path = File.dirname(@document.attachment.current_path)+'/thumbs'
       FileUtils.mkdir_p(thumb_path)
       params[:page] ||= 1
-
-    # (1..@pages.size).each do |index|
-    #   params[:page] ||= 1
-    #   page_number = RESULTS_PER_PAGE * (params[:page].to_i - 1) + index - 1
-    #   puts "page_number = #{page_number} | page=#{params[:page]}"
-    #   thumb = Magick::Image.read(@document.attachment.current_path + "[#{page_number}]").first.resize!(200,200)
-    #   thumb.write(thumb_path + "/#{index}.jpg")
-    #   end
-
-    RGhost::Convert.new(@document.attachment.current_path).to :jpg, :multipage => true, :range => @pages.first.position..@pages.first.position+9,
+      RGhost::Convert.new(@document.attachment.current_path).to :jpg, :multipage => true, :range => @pages.first.position..@pages.first.position+9,
                                                                       :resolution => 100, :filename => "#{thumb_path+'/thumb.jpg'}"
 
     end
