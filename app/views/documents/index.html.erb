@@ -6,6 +6,8 @@
 
   <%= link_to(image_tag('plus_sign.png', :size => '11x11', :alt => '+') + " Add New Subject", new_document_path, :class => 'action new') %>
 
+  <%= will_paginate @documents %>
+
   <div><%= pluralize(@documents.size, 'document') %> found</div>
   <table class="listing" summary="document list">
     <tr class="header">

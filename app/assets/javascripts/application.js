@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require nprogress
+//= require nprogress-turbolinks
+
+angular.module('cse2017_web', [ 'nprogress-rails' ]);
