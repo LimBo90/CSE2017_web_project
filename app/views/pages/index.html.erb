@@ -1,17 +1,18 @@
 <% @page_title = "#{@document.name} | Pages" %>
 
 <%= link_to("<< Back to List", documents_path, :class => 'back-link') %> <br>
-
- <%= @document.name %> <br>
-
- <%= will_paginate @pages %>
+<h2 style="margin-left:40%"><%=@document.name %></h2>
+<hr>
+ 
 
  <% @pages.each do |page| %>
 
  <%= page.position %>    <!-- TODO: fix grid style -->
- <%= link_to(image_tag("/documents/document #{@document.id}/imgs/#{page.position}.jpg",size: "200x200"), document_page_path(document_id: params[:document_id] , id: page.id)) %>
+ <%= link_to(image_tag("/documents/document #{@document.id}/imgs/#{page.position}.jpg",class: "img-thumbnail", size: "200x200"), document_page_path(document_id: params[:document_id] , id: page.id)) %>
 <% end %>
 <div>
+<h3 style="margin-left:29%"><%= will_paginate @pages %></h3>
+<hr>
   <%= render 'likes/likes' %>
   <%= render 'comments/comments' %>
   <%= render 'comments/form' %>
