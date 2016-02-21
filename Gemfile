@@ -28,6 +28,7 @@ gem 'therubyracer'
 gem 'carrierwave'
 
 gem 'rmagick'
+gem 'rghost', '~> 0.9.6'
 
 gem "paperclip", "~> 4.3"
 

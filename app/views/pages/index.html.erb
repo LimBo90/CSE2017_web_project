@@ -6,10 +6,11 @@
 
  <%= will_paginate @pages %>
 
- <% @pages.each do |page| %>
+ <% @pages.each_with_index do |page, index| %>
 
  <%= page.position %>    <!-- TODO: fix grid style -->
- <%= link_to(image_tag("/documents/document #{@document.id}/imgs/#{page.position}.jpg",size: "200x200"), document_page_path(document_id: params[:document_id] , id: page.id)) %>
+ <%= link_to(image_tag("/documents/document #{@document.id}/thumbs/thumb_#{format('%04d', index + 1)}.jpg?time=#{Time.now}" , size: '200x200'),
+             document_page_path(document_id: params[:document_id] , id: page.id))%>
 <% end %>
 <div>
   <%= render 'comments/comments' %>
