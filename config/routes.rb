@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
   get 'pages/index'
 
-  resources :documents do
-    member do
+  resources :documents do 
+    member do 
       get :delete
     end
-    resources :likes
+
     resources :pages do
-    resources :likes  
+      resources :likes
       resources :comments, :except => [:show] do
         member do
           get :delete
-        end
       end
     end
+  end
+    resources :likes
     resources :comments, :except => [:show] do
       member do
       get :delete
@@ -23,8 +24,9 @@ Rails.application.routes.draw do
 
    resources :pages do
     resources :comments
+    resources :likes
     end
-
+   
   root "documents#index"
 
   resources :users, :except => [:index] do

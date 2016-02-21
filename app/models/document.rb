@@ -3,6 +3,7 @@ class Document < ActiveRecord::Base
   belongs_to :uploader, :class_name => 'User', :foreign_key => 'uploader_id'
   has_many :pages
   has_many :comments , as: :commentable
+  has_many :likes , as: :likable
 
   mount_uploader :attachment , PdfUploader
 

@@ -10,9 +10,7 @@ class DocumentsController < ApplicationController
 
   def show
     @document = Document.find(params[:id])
-    @likable = @document
-    @likes = @likable.likes
-    @like = Like.new
+ 
   end
 
   def new

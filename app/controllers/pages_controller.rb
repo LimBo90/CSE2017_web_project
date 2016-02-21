@@ -8,6 +8,9 @@ class PagesController < ApplicationController
     @comments = @commentable.comments
     @comment = Comment.new
     @pages = @document.pages 
+    @likable = @document
+    @likes = @likable.likes
+    @like = Like.new
   end
 
   def show
@@ -17,6 +20,9 @@ class PagesController < ApplicationController
     @commentable = @page
     @comments = @commentable.comments
     @comment = Comment.new
+    @likable = @page
+    @likes = @likable.likes
+    @like = Like.new
   end
   
   private
