@@ -3,15 +3,6 @@ class CommentsController < ApplicationController
 	before_action :confirm_logged_in
 	before_action :load_commentable
 
-	def index
-		@comments = @commentable.comments
-	end
-
-	def new
-		@comment = @commentable.comments.new
-		
-	end
-
 	def create
 		@comment = @commentable.comments.new(comment_params)
 		@comment.user_name = session[:username]
