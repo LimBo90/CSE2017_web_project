@@ -4,10 +4,13 @@ class PagesController < ApplicationController
   before_action :find_document
 
   def index
+    @pages = Page.where(:document_id => @document.id).paginate(:page => params[:page],:per_page => 10)
     @commentable = @document
     @comments = @commentable.comments
     @comment = Comment.new
-    @pages = Page.where(:document_id => @document.id).paginate(:page => params[:page],:per_page => 10)
+    @likable = @document
+    @likes = @likable.likes
+    @like = Like.new
   end
 
   def show
@@ -17,6 +20,9 @@ class PagesController < ApplicationController
     @commentable = @page
     @comments = @commentable.comments
     @comment = Comment.new
+    @likable = @page
+    @likes = @likable.likes
+    @like = Like.new
   end
   
   private
@@ -25,5 +31,4 @@ class PagesController < ApplicationController
         @document = Document.find(params[:document_id])
       end
     end
-
 end

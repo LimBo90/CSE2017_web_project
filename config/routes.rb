@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
-  get 'pages/index'
 
   resources :documents do
+    resources :comments, :except => [:show]
+    resources :likes
     resources :pages do
       resources :comments, :except => [:show]
+      resources :likes
     end
-    resources :comments, :except => [:show]
   end
 
-   resources :pages do
-    resources :comments
-    end
-
+  resources :pages do
+    resources :comments, :except => [:show]
+    resources :likes
+  end
+   
   root "documents#index"
 
   resources :users, :except => [:index]
