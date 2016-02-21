@@ -13,6 +13,7 @@
              document_page_path(document_id: params[:document_id] , id: page.id))%>
 <% end %>
 <div>
+  <%= render 'likes/likes' %>
   <%= render 'comments/comments' %>
   <%= render 'comments/form' %>
 </div>

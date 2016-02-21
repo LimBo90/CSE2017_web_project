@@ -2,6 +2,7 @@ class Page < ActiveRecord::Base
 
   has_many :comments , as: :commentable
   belongs_to :document
+  has_many :likes , as: :likable
 
   validates :position, :presence => true
   validates_uniqueness_of :position , scope: :document_id
