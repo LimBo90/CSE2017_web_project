@@ -1,34 +1,34 @@
 <%= error_messages_for(@user) %>
 
-<table summary="form fields">
+<table summary="form fields" class="table table-bordered">
   <tr>
     <th><%= f.label(:username, "Username") %></th>
-    <td><%= f.text_field(:username) %></td>
+    <td><%= f.text_field(:username,:class => "form-control") %></td>
   </tr>
   <tr>
     <th><%= f.label(:first_name, "First Name") %></th>
-    <td><%= f.text_field(:first_name) %></td>
+    <td><%= f.text_field(:first_name,:class => "form-control") %></td>
   </tr>
   <tr>
     <th><%= f.label(:last_name, "Last Name") %></th>
-    <td><%= f.text_field(:last_name) %></td>
+    <td><%= f.text_field(:last_name,:class => "form-control") %></td>
   </tr>
   <tr>
     <th><%= f.label(:email, "Email Address") %></th>
-    <td><%= f.text_field(:email) %></td>
+    <td><%= f.text_field(:email,:class => "form-control") %></td>
   </tr>
   <tr>
     <th><%= f.label(:email_confirmation, "Email Confirmation") %></th>
-    <td><%= f.text_field(:email_confirmation) %></td>
+    <td><%= f.text_field(:email_confirmation,:class => "form-control") %></td>
   </tr>
   <% unless is_edit %>
       <tr>
         <th><%= f.label(:password) %></th>
-        <td><%= f.password_field(:password) %></td>
+        <td><%= f.password_field(:password,:class => "form-control") %></td>
       </tr>
       <tr>
         <th><%= f.label(:password_confirmation) %></th>
-        <td><%= f.password_field(:password_confirmation) %></td>
+        <td><%= f.password_field(:password_confirmation,:class => "form-control") %></td>
       </tr>
   <% end %>
   <tr>
@@ -37,7 +37,7 @@
   </tr>
   <% if is_edit %>
       <tr>
-        <td><%= link_to "<button>Change Password</button>".html_safe, :action => :change_password, :id => @user.id%></td>
+        <td><%= link_to "Change Password".html_safe,class: 'btn btn-primary', :action => :change_password, :id => @user.id%></td>
       </tr>
   <% end %>
 </table>
