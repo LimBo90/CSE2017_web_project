@@ -30,31 +30,39 @@ class DocumentsController < ApplicationController
 
   def edit
     @document=Document.find(params[:id])
+    unless authorized_user?
+      flash[:notice] = "You're not authorized to  edit this document #{@document.name}."
+      redirect_to(root_path)
+    end
   end
 
   def update
     @document = Document.find(params[:id])
-    if @document.update_attributes(document_params)
+    if !authorized_user?
+      flash[:notice] = "You're not authorized to  update this document #{@document.name}."
+      redirect_to(root_path)
+    elsif @document.update_attributes(document_params)
       flash[:notice] = "The Document #{@document.name} updated successfully."
       redirect_to(:action => 'index')
     else
       render "edit"
     end
   end
-  
-  def delete
-    @document = Document.find(params[:id])
-  end
 
   def destroy
   	@document = Document.find(params[:id])
-    pages = @document.pages
-    pages.each do |p|
-      p.destroy
+    unless authorized_user?
+      flash[:notice] = "You're not authorized to  delete this document."
+      redirect_to(root_path)
+    else
+      pages = @document.pages
+      pages.each do |p|
+        p.destroy
+      end
+      @document.destroy
+      flash[:notice] = "The Document #{@document.name} deleted successfully."
+      redirect_to request.referrer
     end
-  	@document.destroy
-    flash[:notice] = "The Document #{@document.name} deleted successfully."
-  	redirect_to(:action => 'index')
   end
 
   private
@@ -81,4 +89,9 @@ class DocumentsController < ApplicationController
       @document.pages << page
     end
   end
+
+  def authorized_user?
+    @document.uploader.id == session[:user_id]
+  end
+
 end

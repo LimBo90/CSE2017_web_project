@@ -25,23 +25,22 @@ class CommentsController < ApplicationController
 
 	def edit
 		@comment = @commentable.comments.find(params[:id])
+		unless authorized_user?
+			flash[:notice] = "You're not authorized to  edit information of this account. Please login and try again."
+      redirect_to(root_path)
+		end
 		session[:return_to] ||= request.referer
 	end
 
 	def update
 		@comment = @commentable.comments.find(params[:id])
-		if  authorized_user?
-			if @comment.update_attributes(comment_params)
-				flash[:notice] = "Comment updated successfully."
-				redirect_to session.delete(:return_to) #redirect to the URL where the edit request came
-			else
-				# If update fails, redisplay the form so user can fix problems
-				render('edit')
-			end
-		else
-			flash[:notice] = "You don't have permissions to edit this comment."
-			redirect_to request.referrer
-		end
+    if @comment.update_attributes(comment_params)
+      flash[:notice] = "Comment updated successfully."
+      redirect_to session.delete(:return_to) #redirect to the URL where the edit request came
+    else
+      # If update fails, redisplay the form so user can fix problems
+      render('edit')
+    end
 	end
 
 	def destroy
