@@ -4,6 +4,8 @@
 
  <%= @document.name %> <br>
 
+ <%= will_paginate @pages %>
+
  <% @pages.each do |page| %>
 
  <%= page.position %>    <!-- TODO: fix grid style -->

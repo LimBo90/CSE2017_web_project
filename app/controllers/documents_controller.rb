@@ -5,7 +5,7 @@ class DocumentsController < ApplicationController
   before_action :confirm_logged_in
 
   def index
-  	@documents = Document.all
+    @documents = Document.all.paginate(:page => params[:page],:per_page => 10)
   end
 
   def show

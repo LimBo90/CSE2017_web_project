@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     @commentable = @document
     @comments = @commentable.comments
     @comment = Comment.new
-    @pages = @document.pages 
+    @pages = Page.where(:document_id => @document.id).paginate(:page => params[:page],:per_page => 10)
   end
 
   def show
