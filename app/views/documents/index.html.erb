@@ -19,7 +19,7 @@
     </tr>
     <% @documents.each do |document| %>
         <tr class="<%= cycle('odd', 'even') %>">
-          <td><%= link_to(image_tag("#{document.directory}/imgs/thumb.png", alt: "thumbnail"), document_pages_path(document_id: document.id),
+          <td><%= link_to(image_tag("#{document.directory}/thumb.png", alt: "thumbnail", size: '200x200'), document_pages_path(document_id: document.id),
                           :class => 'action index') %></td>
           <td><%= link_to(document.name, document_pages_path(document_id: document.id), 
                           :class => 'action index') %></td>
