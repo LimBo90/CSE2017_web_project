@@ -33,6 +33,8 @@ gem "paperclip", "~> 4.3"
 
 gem 'will_paginate', '~> 3.0.6'
 
+gem 'nprogress-rails'
+
 
 
 # Use ActiveModel has_secure_password
