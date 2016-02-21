@@ -1,6 +1,7 @@
 <h2> Page Show </h2>
 <% @page_title = "#{@document.name} |  Page #{@page.position}" %>
-<%= link_to("<< Back to Slides", {:action => 'index', :document_id => @document.id}, :class => 'back-link') %> <br>
+<%= link_to("<< Back to Pages", {:action => 'index', :document_id => @document.id, page: get_results_page(@page.position, PagesController::RESULTS_PER_PAGE),
+                                  :class => 'back-link'}) %> <br>
   <!-- TODO: make the next and previous buttons floating -->
   <!-- TODO: add page selection -->
 <% unless @next_page %>

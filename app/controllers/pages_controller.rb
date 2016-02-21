@@ -36,12 +36,11 @@ class PagesController < ApplicationController
     image.write(image_path)
   end
 
-    def generate_thumbs
-      thumb_path = File.dirname(@document.attachment.current_path)+'/thumbs'
-      FileUtils.mkdir_p(thumb_path)
-      RGhost::Convert.new(@document.attachment.current_path).to :jpg, :multipage => true, :range => @pages.first.position..@pages.first.position+9,
+  def generate_thumbs
+    thumb_path = File.dirname(@document.attachment.current_path)+'/thumbs'
+    FileUtils.mkdir_p(thumb_path)
+    RGhost::Convert.new(@document.attachment.current_path).to :jpg, :multipage => true, :range => @pages.first.position..@pages.first.position+9,
                                                                       :resolution => 100, :filename => "#{thumb_path+'/thumb.jpg'}"
-
-    end
+  end
 end
 
