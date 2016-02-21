@@ -1,13 +1,14 @@
-
-<p><%=  @likes.size %>  people like this </p>
-	<% @logged_in= session[:user_id] %>
+<% unless (@likes.size==0)%>
+    <p>
+      <%= @likes.size.to_s %>
+      <%= link_to 'people', [@likable, @like], action: :show%>
+      <%= " like this"%>
+    </p>
+    <%end%>
+    <% @logged_in= session[:user_id] %>
       <% unless @likes.where(:user_id => @logged_in).empty? %>
       <% like = @likes.where(:user_id => @logged_in).first %>
 		<b><%= link_to "<button>Unlike</button>".html_safe, [@likable, like], method: :delete %></b>      
 	 <% else %>
-          <%= form_for [@likable , @like] do %>
-    <div class="form-buttons">
-      <%= submit_tag("like") %>
-    </div>
-<% end %>
+    <b><%= link_to "<button>Like</button>".html_safe, [@likable, @like], method: :post %></b>
       <% end %> 

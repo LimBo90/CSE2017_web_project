@@ -4,14 +4,6 @@ before_action :load_likable
 def index
 	#get likes on this likable	
 	@likes = @likable.likes
-	#get number of likes to display on page or document	
-	@number_of_likes = @likes.size
-end
-
-
-def new
-@like = @likable.likes.new
-#save the request here for the delete action to return to the pre- new action 	
 end
 
 
@@ -40,7 +32,6 @@ def destroy
 	@likable.likes.find(params[:id]).destroy
 	redirect_to request.referrer
 end
-
 
 private
 def load_likable
