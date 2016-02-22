@@ -1,0 +1,9 @@
+Error: /undefinedfilename in (/home/abdelrahman/Desktop/New/public/documents/document 4/lesson2.pdf)
+Operand stack:
+
+Execution stack:
+   %interp_exit   .runexec2   --nostringval--   --nostringval--   --nostringval--   2   %stopped_push   --nostringval--   --nostringval--   --nostringval--   false   1   %stopped_push
+Dictionary stack:
+   --dict:1178/1684(ro)(G)--   --dict:0/20(G)--   --dict:77/200(L)--
+Current allocation mode is local
+Last OS error: No such file or directory
