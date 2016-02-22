@@ -15,8 +15,12 @@ class AccessController < ApplicationController
       end
     end
     if authorized_user
-      # mark user as logged in  TODO:auth_token
-      cookies.permanent[:auth_token] = authorized_user.auth_token
+      # mark user as logged in
+      if params[:remember_me]
+        cookies.permanent[:auth_token] = authorized_user.auth_token
+      else
+        cookies[:auth_token] = authorized_user.auth_token
+      end
       flash[:notice] = "Hello #{authorized_user.name}"
       redirect_to(documents_path)
     else
@@ -26,7 +30,7 @@ class AccessController < ApplicationController
   end
 
   def logout
-    #mark user as logged out TODO:auth_token
+    #mark user as logged out
     cookies.delete(:auth_token)
     redirect_to(:action => "login")
   end
