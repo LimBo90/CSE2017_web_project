@@ -2,7 +2,7 @@
 
 <div class="documents index">
   <h2>Documents</h2>
-
+  <hr>
 
   <%= link_to(image_tag('plus_sign.png', :size => '11x11', :alt => '+') + " Add New Subject", new_document_path, :class => 'action new') %>
 
@@ -27,12 +27,13 @@
                           :class => 'action show') %></td>
           <td class="center"><%=document.pages.size%></td>
           <td class="actions">
-            <%= link_to("<button>Details</button>".html_safe, document_path(id: document.id), :class => 'action show') %>
-            <%= link_to("<button>Edit</button>".html_safe, edit_document_path(id: document.id), :class => 'action edit') if session[:user_id] == document.uploader_id%>
+            <%= link_to("Details".html_safe, document_path(id: document.id), :class => 'btn btn-primary') %>
             <br>
-            <%= link_to("<button>Delete</button>".html_safe, document_path(id: document.id), :method => :delete, data: { confirm: "Are you sure you want to delete this document #{document.name}?" }, :class => 'action delete') if session[:user_id] == document.uploader_id %>
+            <%= link_to "Download".html_safe, document.attachment_url, class: 'btn btn-primary' %>
             <br>
-            <%= link_to "<button>Download</button>".html_safe, document.attachment_url, class: 'action download' %>
+            <%= link_to("Edit".html_safe, edit_document_path(id: document.id), :class => 'btn btn-primary') if session[:user_id] == document.uploader_id%>
+            <br>
+            <%= link_to("Delete".html_safe, document_path(id: document.id), :method => :delete, data: { confirm: "Are you sure you want to delete this document #{document.name}?" }, :class => 'btn btn-danger') if session[:user_id] == document.uploader_id %>
           </td>
         </tr>
     <% end %>

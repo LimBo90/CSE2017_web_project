@@ -13,9 +13,8 @@ class Document < ActiveRecord::Base
   validates :description, length: {maximum: 125}
 
   after_create :create_related_pages
-  before_destroy :delete_document_comments
+  before_destroy :delete_document_comments, :delete_document_likes
   after_destroy :remove_folder, :remove_related_pages
-
 
   def directory
     "/documents/document #{self.id}"
@@ -44,6 +43,9 @@ class Document < ActiveRecord::Base
     self.comments.destroy_all
   end
 
+  def delete_document_likes
+    self.likes.destroy_all
+  end
 
 
 end

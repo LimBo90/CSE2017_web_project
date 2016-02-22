@@ -9,12 +9,16 @@ class Page < ActiveRecord::Base
 
 
   scope :sorted, lambda { order("pages.position ASC") }
-  before_destroy :delete_page_comments
+  before_destroy :delete_page_comments, :delete_page_likes
   
   private
     
   def delete_page_comments
     self.comments.destroy_all
+  end
+
+  def delete_page_likes
+    self.likes.destroy_all
   end
 
   def link_to_image

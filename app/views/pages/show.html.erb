@@ -1,21 +1,27 @@
-<h2> Page Show </h2>
+<h2 style="margin-left:40%"> <%="#{@document.name} |  Page #{@page.position}"%></h2>
+<hr>
 <% @page_title = "#{@document.name} |  Page #{@page.position}" %>
 <%= link_to("<< Back to Pages", {:action => 'index', :document_id => @document.id, page: get_results_page(@page.position, PagesController::RESULTS_PER_PAGE),
                                   :class => 'back-link'}) %> <br>
   <!-- TODO: make the next and previous buttons floating -->
   <!-- TODO: add page selection -->
-<% unless @next_page %>
-<%= link_to(image_tag("/documents/document #{@document.id}/tmp.png?time=#{Time.now}"), document_page_path(document_id: params[:document_id],
-                                                                                                         id: @next_page.id),:class => 'action show') %>
+<% if @next_page %>
+    <%= link_to(image_tag("/documents/document #{@document.id}/tmp.png?time=#{Time.now}"), document_page_path(document_id: params[:document_id],
+                                                                                                              id: @next_page.id),:class => 'action show') %>
 <% else %>
     <%= image_tag("/documents/document #{@document.id}/tmp.png?time=#{Time.now}") %>
  <% end %>
+<div id="prev_and_next">
+
 
 <%= link_to(image_tag('perivous_page.png',:size => '20x20', :alt => '<') + "Perivous Page", document_page_path(document_id: params[:document_id],
-			id: @previous_page.id),:class => 'action show')  if @previous_page%>
+			id: @previous_page.id),:id => 'prev_page')  if @previous_page%>
 
-<%= link_to(image_tag('next_page.jpg',:size => '20x20', :alt => '>') + "Next Page", document_page_path(document_id: params[:document_id],
-			id: @next_page.id),:class => 'action show') if @next_page %>
+<%= link_to("Next Page", document_page_path(document_id: params[:document_id],
+			id: @next_page.id),:id => 'prev_page') if @next_page %>
+			<%=image_tag('next_page.jpg',:size => '20x20', :alt => '>')%>
+</div>
+<hr>
 <div>
   <%= render 'likes/likes' %>
   <%= render 'comments/comments' %>

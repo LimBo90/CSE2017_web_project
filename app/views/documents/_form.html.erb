@@ -1,19 +1,19 @@
 <%= error_messages_for(@document) %>
-<table>
+<table class="table table-bordered">
 
   <tr>
     <th><%= f.label :name %></th>
-    <td><%= f.text_field :name %></td>
+    <td><%= f.text_field :name, :class => "form-control" %></td>
   </tr>
   <% unless is_edit %>
   <tr>
     <th><%= f.label :attachment %></th>
-    <td><%= f.file_field :attachment %></td>
+    <td><center><%= f.file_field :attachment %> <center></td>
   </tr>
       <% end %>
   <tr>
     <th><%= f.label :description %></th>
-    <td><%= f.text_area :description , size: '30x15'%></td>
+    <td><%= f.text_area :description ,:class=>"form-control", size: '30x2.5'%></td>
   </tr>
 
 </table>

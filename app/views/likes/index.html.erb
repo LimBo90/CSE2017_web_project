@@ -1,1 +1,8 @@
-<%= render 'likes/form' %>
+<h2><u>People who like this:</u></h2>
+<table>
+<% @likes.each do |like|%>
+    <tr>
+      <th><b><%= link_to(like.user.username, user_path(like.user_id)) %></b></th>
+    </tr>
+<%end%>
+</table>
