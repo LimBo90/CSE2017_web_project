@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>CSE2017 web | <%= @page_title %></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -21,7 +23,8 @@
       <%if @current_user%>
       <li><%= link_to("Home", root_path, :class => 'back-link')  %></li>
       <li><%= link_to(@current_user.username, user_path(@current_user.id)) %></a></li>
-      <li><%= link_to("Logout", :controller => 'access',:action => 'logout') %></a></li>
+      <li>
+<%= link_to("Logout", :controller => 'access',:action => 'logout') %></a></li>
       <% end %>
     </ul>
   </div>

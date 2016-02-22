@@ -8,8 +8,9 @@
       <%= render(:partial => "form", :locals => {:f => f, is_edit: true}) %>
 
       <div class="form-buttons">
-        <%= submit_tag("Update User",:class => "btn btn-primary",:style => "margin-left:43%") %>
-      </div>
+        <%= submit_tag("Update User",:style => "margin-left:35%",class: 'btn btn-primary') %>
 
+      </div>
+<%= link_to "Change Password".html_safe,{ :action => :change_password, :id => @user.id},class: 'btn btn-primary change_password_button'%>
   <% end %>
 </div>

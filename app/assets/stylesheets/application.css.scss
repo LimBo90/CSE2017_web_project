@@ -9,6 +9,7 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
+
  */
 @import "bootstrap";
  /*
@@ -21,7 +22,7 @@
 	margin-bottom: 5px;
 }
 .table td {
-   text-align: center !important;   
+   text-align: center  !important;   
    vertical-align: middle !important;
 }
 .table th {
@@ -34,6 +35,40 @@
 #prev_page
 {	position : relative;
 	display: inline-block !important;
-	margin-left:27.5%;
-		
+	margin-left:27.5%;	
+}
+.change_password_button
+{
+	margin-left:48%;
+	margin-top: -61px;
+	
+}
+.birth_date
+{	
+	position: absolute;
+	margin-left:0px;
+	margin-top:-14px;
+}
+.attachment_field
+{	margin-top:-14px;
+	position: absolute;
+	margin-left:0px;
+}
+.pagepositionfix
+{
+	width: 200px;
+	display: inline-block;
+	margin-left:6%;
+}
+.add_new_document
+{
+	
+}
+.notice
+{	width: 200px;
+background: -moz-linear-gradient(bottom right, red, yellow);
+}
+body
+{
+	background-color:#F1F1F1;
 }

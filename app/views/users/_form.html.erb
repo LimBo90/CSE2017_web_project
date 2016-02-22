@@ -33,11 +33,7 @@
   <% end %>
   <tr>
     <th><%= f.label :birthday, "Birth Date" %></th>
-    <td><%= f.date_select(:birth_date, :order => [:day, :month, :year], :start_year => Date.today.year - 100, :end_year => Date.today.year)%></td>
+    <td><div  class="birth_date"><%= f.date_select(:birth_date, :order => [:day, :month, :year], :start_year => Date.today.year - 100, :end_year => Date.today.year)%></div></td>
   </tr>
-  <% if is_edit %>
-      <tr>
-        <td><%= link_to "Change Password".html_safe,class: 'btn btn-primary', :action => :change_password, :id => @user.id%></td>
-      </tr>
-  <% end %>
+  
 </table>

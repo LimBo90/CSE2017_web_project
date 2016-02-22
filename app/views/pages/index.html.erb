@@ -1,18 +1,22 @@
 <% @page_title = "#{@document.name} | Pages" %>
-
-<%= link_to("<< Back to List", documents_path, :class => 'back-link') %> <br>
+<%= link_to content_tag(:i,nil,class: 'fa fa-chevron-left fa-lg')+" Back To List",
+    documents_path, :class => 'btn btn-primary' %><br>
 <h2 style="margin-left:40%"><%=@document.name %></h2>
 <hr>
  
 
  <% @pages.each_with_index do |page, index| %>
- <%= page.position %>    <!-- TODO: fix grid style -->
- <%= link_to(image_tag("/documents/document #{@document.id}/thumbs/thumb_#{format('%04d', index + 1)}.jpg?time=#{Time.now}" , class: "img-thumbnail",size: '200x200'),
-             document_page_path(document_id: params[:document_id] , id: page.id))%>
-             <% end %>
-<div>
+  <!-- TODO: fix grid style -->
+ 	<div class="pagepositionfix">
+ 		<%= page.position%>
+ 		<%= link_to(image_tag("/documents/document #{@document.id}/thumbs/thumb_#{format('%04d', index + 1)}.jpg?time=#{Time.now}"	, class: "img-thumbnail",size: '200x200',:style => 'margin-bottom:10px;'),document_page_path(document_id: params[:document_id] , id: page.id)) %> </div>
+             
+ <% end %>	
+	<div>
 <h3 style="margin-left:29%"><%= will_paginate @pages %></h3>
 <hr>
+
+
   <%= render 'likes/likes' %>
   <%= render 'comments/comments' %>
   <%= render 'comments/form' %>

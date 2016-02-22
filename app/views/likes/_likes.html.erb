@@ -7,7 +7,7 @@
     <%end%>
       <% unless @likes.where(:user_id => @current_user.id).empty? %>
       <% like = @likes.where(:user_id => @current_user.id).first %>
-		<b><%= link_to "<button>Unlike</button>".html_safe, [@likable, like], method: :delete %></b>      
+		<b><%= link_to "Unlike".html_safe, [@likable, like], method: :delete %></b>      
 	 <% else %>
-    <b><%= link_to "<button>Like</button>".html_safe, [@likable, @like], method: :post %></b>
+    <b><%= link_to "Like".html_safe, [@likable, @like], method: :post %></b>
       <% end %> 
