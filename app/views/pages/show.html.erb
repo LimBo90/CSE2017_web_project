@@ -1,4 +1,4 @@
-<h2 style="margin-left:40%"> Page Show </h2>
+<h2 style="margin-left:40%"> <%="#{@document.name} |  Page #{@page.position}"%></h2>
 <hr>
 <% @page_title = "#{@document.name} |  Page #{@page.position}" %>
 <%= link_to("<< Back to Slides", {:action => 'index', :document_id => @document.id}, :class => 'back-link') %> <br>
