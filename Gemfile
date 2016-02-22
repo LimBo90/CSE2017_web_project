@@ -28,7 +28,11 @@ gem 'therubyracer'
 gem 'carrierwave'
 
 gem 'rmagick'
+gem 'rghost', '~> 0.9.6'
+gem 'pdf-reader', '~> 1.3', '>= 1.3.3'
+
 gem 'bootstrap-sass', "~>3.3.6"
+
 gem "paperclip", "~> 4.3"
 
 gem 'will_paginate', '~> 3.0.6'
