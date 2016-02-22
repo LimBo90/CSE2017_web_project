@@ -7,8 +7,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string "last_name", :limit => 50
       t.string "email", :limit => 50 , :null => false
       t.string "password_digest",  :null => false
-      t.string "auth_token"
       t.date "birth_date", :null => false
+      t.string "auth_token"
+      t.string "password_reset_token"
+      t.datetime  "password_reset_sent_at"
       t.timestamps
     end
     add_index("users", "username")

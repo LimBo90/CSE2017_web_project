@@ -1,0 +1,18 @@
+<h1>Reset Password</h1>
+
+<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+<%= error_messages_for @user %>
+    <table class="table table-bordered">
+
+      <tr>
+        <th><%= f.label :password %></th>
+        <td><%= f.password_field :password, :class => "form-control" %></td>
+      </tr>
+       <tr>
+         <th><%= f.label :password_confirmation %></th>
+         <td><%= f.password_field :password_confirmation, :class => "form-control" %></td>
+       </tr>
+    </table>
+      <div class="form-buttons"><%= f.submit "Update Password", class: 'btn btn-primary',:style=>"margin-left:50%" %></div>
+
+<% end %>
