@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  before_action :confirm_logged_in, :except => [:create, :new]
+  before_action :confirm_logged_in,:current_user, :except => [:create, :new]
+  after_action :set_current_user, only: [:create]
 
   def show
     @user = User.find(params[:id])
@@ -17,8 +18,6 @@ class UsersController < ApplicationController
     if @user.save
       # If save succeeds, redirect to the index action
       flash[:notice] = "User created successfully."
-      session[:user_id] = @user.id
-      session[:username] = @user.username
       redirect_to(root_path)
     else
       # If save fails, redisplay the form so user can fix problems
@@ -84,14 +83,16 @@ class UsersController < ApplicationController
     if authorized_user?
       @user.destroy
       flash[:notice] = "user '#{user.username}' destroyed successfully."
-      session[:user_id] = nil
-      session[:username] = nil
+      cookies.delete(:auth_token)
       redirect_to(:controller => 'access', :action => 'login')
     end
   end
 
 
   private
+  def set_current_user
+    cookies[:auth_token] = @user.auth_token
+  end
 
   def user_params
     # same as using "params[:user]", except that it:
@@ -101,7 +102,7 @@ class UsersController < ApplicationController
   end
 
   def authorized_user?
-    @user.id == session[:user_id]
+    @user == @current_user
   end
 
 end
