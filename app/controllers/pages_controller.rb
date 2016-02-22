@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   RESULTS_PER_PAGE = 10
 
-  before_action :confirm_logged_in
+  before_action :confirm_logged_in,:current_user
   before_action :find_document
 
   def index

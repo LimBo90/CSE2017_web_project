@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   validate :birth_date_is_valid
 
   before_destroy :delete_user_documents, :delete_user_comments
+  before_create { generate_token(:auth_token) }
 
   def birth_date_is_valid
     if age < 4 || age > 120
@@ -43,6 +44,12 @@ class User < ActiveRecord::Base
 
   def delete_user_comments
     self.comments.destroy_all
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
   end
   
 end

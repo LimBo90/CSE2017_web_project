@@ -7,11 +7,16 @@ class ApplicationController < ActionController::Base
   
 
   def confirm_logged_in
-    unless session[:user_id]
+    unless cookies[:auth_token]
       redirect_to(:controller => 'access', :action => 'login')
-      return false # halts the before_action
+      false # halts the before_action
     else
-      return true
+      true
     end
   end
+
+  def current_user
+    @current_user ||= User.find_by_auth_token( cookies[:auth_token]) if cookies[:auth_token]
+  end
+  helper_method :current_user
 end

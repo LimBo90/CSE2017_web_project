@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
 
-	before_action :confirm_logged_in
+	before_action :confirm_logged_in, :current_user
 	before_action :load_commentable
 
 	def create
 		@comment = @commentable.comments.new(comment_params)
-		@comment.user_name = session[:username]
-		@comment.user_id = session[:user_id].to_i
+		@comment.user_name = session[:username]	#TODO: remove user_name
+		@comment.user = @current_user
 		if @comment.save
       	redirect_to request.referrer
     	else
@@ -57,7 +57,7 @@ class CommentsController < ApplicationController
 	end
 
 	def authorized_user?
-		@comment.user_id == session[:user_id]
+		@comment.user == @current_user
 	end
 
 end

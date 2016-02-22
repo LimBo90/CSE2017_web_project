@@ -5,9 +5,8 @@
       <%= " like this"%>
     </p>
     <%end%>
-    <% @logged_in= session[:user_id] %>
-      <% unless @likes.where(:user_id => @logged_in).empty? %>
-      <% like = @likes.where(:user_id => @logged_in).first %>
+      <% unless @likes.where(:user_id => @current_user.id).empty? %>
+      <% like = @likes.where(:user_id => @current_user.id).first %>
 		<b><%= link_to "<button>Unlike</button>".html_safe, [@likable, like], method: :delete %></b>      
 	 <% else %>
     <b><%= link_to "<button>Like</button>".html_safe, [@likable, @like], method: :post %></b>

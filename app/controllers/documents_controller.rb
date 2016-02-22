@@ -2,7 +2,7 @@ class DocumentsController < ApplicationController
   THUMBNAIL_WIDTH = 100
   THUMBNAIL_HEIGHT= 100
 
-  before_action :confirm_logged_in
+  before_action :confirm_logged_in, :current_user
   after_action :create_thumbnail, only: [:create]
 
   def index
@@ -20,7 +20,7 @@ class DocumentsController < ApplicationController
 
   def create
   	@document =Document.new(document_params)
-    @document.uploader = User.find(session[:user_id].to_i)
+    @document.uploader = @current_user
     if @document.save
     	flash[:notice] = "The Document #{@document.name} uploaded successfully."
       redirect_to(:action => 'index')
@@ -73,7 +73,7 @@ class DocumentsController < ApplicationController
   end
 
   def authorized_user?
-    @document.uploader.id == session[:user_id]
+    @document.uploader == @current_user
   end
 
   def create_thumbnail

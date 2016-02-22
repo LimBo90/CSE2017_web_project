@@ -18,9 +18,9 @@
 
     <ul class="nav navbar-nav navbar-right">
 
-      <%if session[:user_id]%>
-      <li><%= link_to("Home", root_path, :class => 'back-link') if session[:user_id] %></li>
-      <li><%= link_to(session[:username], user_path(session[:user_id])) %></a></li>
+      <%if @current_user%>
+      <li><%= link_to("Home", root_path, :class => 'back-link')  %></li>
+      <li><%= link_to(@current_user.username, user_path(@current_user.id)) %></a></li>
       <li><%= link_to("Logout", :controller => 'access',:action => 'logout') %></a></li>
       <% end %>
     </ul>

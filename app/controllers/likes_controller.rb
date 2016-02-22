@@ -1,5 +1,6 @@
 class LikesController < ApplicationController
 before_action :load_likable
+before_action :confirm_logged_in, :current_user
 
 def index
 	#get likes on this likable	
@@ -10,11 +11,9 @@ end
 def create
 #get likes on this likable
 @likes = @likable.likes
-#get the user id logged in 
-@logged_in= session[:user_id]
 		#create a new like object
 		@like = @likable.likes.new
-		@like.user_id = session[:user_id].to_i
+		@like.user = @current_user
 		#if saved Go back to origin from new with like created
 			if @like.save
 				redirect_to request.referrer
