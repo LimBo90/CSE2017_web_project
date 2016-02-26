@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
 
 	def create
 		@comment = @commentable.comments.new(comment_params)
-		@comment.user_name = session[:username]	#TODO: remove user_name
+		@comment.user_name = @current_user.username	#TODO: remove user_name
 		@comment.user = @current_user
 		if @comment.save
       	redirect_to request.referrer
