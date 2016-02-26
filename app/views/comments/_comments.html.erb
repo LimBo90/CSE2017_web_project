@@ -2,7 +2,7 @@
 <table>
 <% @comments.each do |comment| %>
 <tr> 
-	<td><b><%= link_to(comment.user_name, user_path(comment.user_id),)%>:</b> <%= comment.text %></td>
+	<td><b><%= link_to(comment.user.username, user_path(comment.user_id),)%>:</b> <%= comment.text %></td>
 </tr>
 <tr>
 	<td> <%= "<small><b>Created at: </b> #{comment.created_at}</small>".html_safe %>

@@ -4,7 +4,6 @@ class CreateComments < ActiveRecord::Migration
 
       t.timestamps null: false
       t.string "text" , null: false
-      t.string "user_name" , null: false
       t.belongs_to :commentable , polymorphic: true
       t.integer "user_id" , null: false
     end
